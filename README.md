@@ -1,1 +1,1 @@
-https://github.com/subhk24/HotelManagement.git
+https://subhk24.github.io/HotelManagement/
