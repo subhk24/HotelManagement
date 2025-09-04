@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Details - Manali</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    .header {
+      background: #6a0dad;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+    .header .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .header nav {
+      display: flex;
+      gap: 20px;
+    }
+    .header nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .header nav a:hover {
+      text-decoration: underline;
+    }
+    .header .buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .header .buttons button {
+      background: white;
+      color: #6a0dad;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .header .buttons button:hover {
+      background: #ddd;
+    }
+
+    /* SEARCH BAR */
+    .search-bar {
+      background: #6a0dad;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .search-bar input,
+    .search-bar select,
+    .search-bar button {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .search-bar button {
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .search-bar button:hover {
+      background: #0056b3;
+    }
+
+    /* LAYOUT */
+    .container {
+      display: flex;
+      margin: 20px;
+      gap: 20px;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 250px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      height: fit-content;
+    }
+    .sidebar h3 {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    .sidebar label {
+      display: block;
+      margin: 6px 0;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .sidebar input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    /* HOTEL CARDS */
+    .hotels {
+      flex: 1;
+    }
+    .hotel-card {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: transform 0.2s ease-in-out;
+    }
+    .hotel-card:hover {
+      transform: translateY(-5px);
+    }
+    .hotel-info h2 {
+      margin: 0;
+      font-size: 22px;
+      color: #2c3e50;
+    }
+    .hotel-info p {
+      margin: 8px 0;
+      color: #555;
+      font-size: 14px;
+    }
+    .rating {
+      background: #4caf50;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      display: inline-block;
+      margin-top: 5px;
+    }
+    .price {
+      color: green;
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .gallery h3 {
+      margin: 8px 0;
+      font-size: 16px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">TravelBooking</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Hotels</a>
+      <a href="#">Account</a>
+      <a href="#">Blog</a>
+      <a href="#">Pages</a>
+    </nav>
+    <div class="buttons">
+      <button>Cart</button>
+      <button>Dashboard</button>
+      <button>Login</button>
+    </div>
+  </div>
+
+  <!-- SEARCH BAR -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search destination">
+    <input type="date">
+    <input type="date">
+    <select>
+      <option>2 Adults, 1 Room</option>
+      <option>1 Adult, 1 Room</option>
+      <option>2 Adults, 2 Rooms</option>
+    </select>
+    <button>Search</button>
+  </div>
+
+  <div class="container">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <h3>Filters</h3>
+      <label><input type="checkbox"> Free Breakfast</label>
+      <label><input type="checkbox"> Free Cancellation</label>
+      <label><input type="checkbox"> Couple Friendly</label>
+      <label><input type="checkbox"> Early Bird Deal</label>
+      <label><input type="checkbox"> Flexible Check-In</label>
+      <label><input type="checkbox"> Daily Steal Deal</label>
+    </div>
+
+    <!-- HOTELS -->
+    <div class="hotels">
+      <div class="hotel-card">
+        <div class="hotel-info">
+          <h2>Royal Orchid Hotel</h2>
+          <p>Road | 2 km from Ridge</p>
+          <span class="rating">4.2/5</span>
+          <p class="price">₹2,499 / night</p>
+        </div>
+        <h2>Photo Gallery</h2>
+        <div class="gallery">
+          <div>
+            <h3>Room</h3>
+            <img src="https://th.bing.com/th/id/OIP.WG8C_fRsVR7keIcFq3YVwwAAAA?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Room">
+          </div>
+          <div>
+            <h3>Lobby</h3>
+            <img src="https://i.pinimg.com/originals/27/11/20/271120e4087d3dba4e18fcbffe3b7a5d.jpg" alt="Lobby">
+          </div>
+          <div>
+            <h3>Restaurant</h3>
+            <img src="https://tse3.mm.bing.net/th/id/OIP.YHaV8w2NmbpOL-62-3A4kgHaDt?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Restaurant">
+          </div>
+          <div>
+            <h3>Parking</h3>
+            <img src="https://serretecno.mx/wp-content/uploads/2018/10/parking-hotel-bordeaux.jpg" alt="Parking">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
