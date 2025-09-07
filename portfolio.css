@@ -1,0 +1,28 @@
+/* Portfolio Page */
+
+/* General Layout */
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Section title */
+.container h2 {
+  margin-top: 30px;
+  color: #444;
+}
+
+/* Project cards */
+.project {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.project h3 {
+  margin-bottom: 10px;
+  color: #6a11cb;
+}
