@@ -1,0 +1,34 @@
+/* Our Team Page */
+
+/* Team grid layout */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Team member cards */
+.team-member {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.team-member i {
+  font-size: 40px;
+  color: #6a11cb;
+  margin-bottom: 15px;
+}
+
+.team-member h3 {
+  margin-bottom: 8px;
+  color: #6a11cb;
+}
+
+.team-member p {
+  font-size: 14px;
+  color: #555;
+}
