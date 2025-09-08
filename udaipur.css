@@ -28,12 +28,10 @@ body {
   cursor: pointer;
 }
 
-/* Container */
 .container {
   padding: 20px;
 }
 
-/* Filters */
 .filters {
   width: 20%;
   float: left;
@@ -52,7 +50,6 @@ body {
   margin: 8px 0;
 }
 
-/* Hotel List */
 .hotel-list {
   width: 75%;
   float: right;
