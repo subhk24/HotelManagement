@@ -17,6 +17,23 @@
             --sidebar-bg: #1e293b;
             --sidebar-text: #cbd5e1;
             --sidebar-active: #334155;
+            
+            /* Light mode colors */
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --header-bg: #ffffff;
+        }
+
+        .dark-mode {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f1f5f9;
+            --border-color: #334155;
+            --header-bg: #1e293b;
+            --sidebar-bg: #0f172a;
+            --sidebar-active: #334155;
         }
 
         * {
@@ -27,11 +44,12 @@
         }
 
         body {
-            background-color: #f1f5f9;
-            color: var(--dark);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             display: grid;
             grid-template-columns: 250px 1fr;
             min-height: 100vh;
+            transition: all 0.3s ease;
         }
 
         /* Sidebar Styles */
@@ -43,6 +61,7 @@
             width: 250px;
             height: 100vh;
             overflow-y: auto;
+            transition: all 0.3s ease;
         }
 
         .logo {
@@ -91,39 +110,47 @@
         .main-content {
             grid-column: 2;
             padding: 2rem;
+            transition: all 0.3s ease;
         }
 
         .header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
         }
 
         .header h1 {
             font-size: 2rem;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
         .dark-mode-toggle {
-            background: none;
-            border: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             cursor: pointer;
             font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
         }
 
         /* Dashboard Stats */
         .welcome-banner {
-            background: white;
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 12px;
             margin-bottom: 2rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .welcome-banner h2 {
             margin-bottom: 0.5rem;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
         .stats-grid {
@@ -134,10 +161,11 @@
         }
 
         .stat-card {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .stat-card h3 {
@@ -149,7 +177,7 @@
         .stat-number {
             font-size: 2rem;
             font-weight: bold;
-            color: var(--dark);
+            color: var(--text-color);
             margin-bottom: 0.5rem;
         }
 
@@ -160,15 +188,17 @@
 
         /* Room Status */
         .room-status {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
+            transition: all 0.3s ease;
         }
 
         .room-status h3 {
             margin-bottom: 1rem;
+            color: var(--text-color);
         }
 
         .status-legend {
@@ -181,6 +211,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--text-color);
         }
 
         .status-color {
@@ -220,18 +251,21 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            color: var(--text-color);
         }
 
         /* Recent Activity */
         .recent-activity {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .recent-activity h3 {
             margin-bottom: 1rem;
+            color: var(--text-color);
         }
 
         .activity-list {
@@ -240,7 +274,8 @@
 
         .activity-item {
             padding: 1rem 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         .activity-item:last-child {
@@ -255,9 +290,18 @@
         /* Room Management */
         .page-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: var(--text-color);
+        }
+
+        .page p {
+            color: var(--text-color);
+            margin-bottom: 1rem;
         }
 
         .search-filter {
@@ -269,15 +313,20 @@
         .search-box {
             flex: 1;
             padding: 0.75rem;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
         }
 
         .filter-select {
             padding: 0.75rem;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            background: white;
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
         }
 
         .rooms-grid {
@@ -287,11 +336,12 @@
         }
 
         .room-card {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border-left: 4px solid var(--success);
+            transition: all 0.3s ease;
         }
 
         .room-card.occupied { border-left-color: var(--primary); }
@@ -300,7 +350,7 @@
 
         .room-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
         }
@@ -308,6 +358,7 @@
         .room-number {
             font-size: 1.2rem;
             font-weight: bold;
+            color: var(--text-color);
         }
 
         .room-status-badge {
@@ -332,12 +383,13 @@
             grid-template-columns: 1fr 1fr;
             gap: 0.5rem;
             margin-bottom: 1rem;
+            color: var(--text-color);
         }
 
         .room-price {
             font-size: 1.1rem;
             font-weight: bold;
-            color: var(--dark);
+            color: var(--text-color);
         }
 
         .room-features {
@@ -348,11 +400,12 @@
         }
 
         .feature-tag {
-            background: #f1f5f9;
+            background: var(--bg-color);
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
             font-size: 0.8rem;
             color: var(--secondary);
+            transition: all 0.3s ease;
         }
 
         /* Guest Management */
@@ -362,21 +415,23 @@
         }
 
         .guest-card {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .guest-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: start;
             margin-bottom: 1rem;
         }
 
         .guest-info h3 {
             margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
 
         .guest-contact {
@@ -396,6 +451,7 @@
             padding: 0.5rem 1rem;
             border-radius: 6px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .add-guest-btn {
@@ -407,14 +463,16 @@
             font-size: 1rem;
             cursor: pointer;
             margin-top: 2rem;
+            transition: all 0.3s ease;
         }
 
         /* Booking Management */
         .bookings-table {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         table {
@@ -425,11 +483,13 @@
         th, td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
         }
 
         th {
-            background: #f8fafc;
+            background: var(--bg-color);
             font-weight: 600;
             color: var(--secondary);
         }
@@ -450,6 +510,7 @@
             border: none;
             cursor: pointer;
             font-size: 1.1rem;
+            color: var(--text-color);
         }
 
         /* Staff Management */
@@ -461,10 +522,12 @@
 
         .tab {
             padding: 0.75rem 1.5rem;
-            background: white;
-            border: 1px solid #cbd5e1;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             cursor: pointer;
+            color: var(--text-color);
+            transition: all 0.3s ease;
         }
 
         .tab.active {
@@ -479,21 +542,23 @@
         }
 
         .staff-card {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         .staff-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: start;
             margin-bottom: 1rem;
         }
 
         .staff-info h3 {
             margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
 
         .staff-role {
@@ -522,12 +587,14 @@
             gap: 0.5rem;
         }
 
-        .action-btn {
+        .staff-action-btn {
             padding: 0.5rem 1rem;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border-color);
             border-radius: 6px;
-            background: white;
+            background: var(--card-bg);
             cursor: pointer;
+            color: var(--text-color);
+            transition: all 0.3s ease;
         }
 
         .deactivate-btn {
@@ -545,6 +612,7 @@
             font-size: 1rem;
             cursor: pointer;
             margin-top: 2rem;
+            transition: all 0.3s ease;
         }
 
         /* Utility Classes */
@@ -798,6 +866,30 @@
             { name: 'David Brown', role: 'maintenance', email: 'david@hotel.com', phone: '+1-555-0103', department: 'Maintenance', hired: '4/5/2023', status: 'active' }
         ];
 
+        // Dark mode functionality
+        const darkModeToggle = document.querySelector('.dark-mode-toggle');
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        // Apply dark mode on page load
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️ Light Mode';
+        }
+
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode');
+            
+            if (isDarkMode) {
+                darkModeToggle.textContent = '☀️ Light Mode';
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                darkModeToggle.textContent = '🌙 Dark Mode';
+                localStorage.setItem('darkMode', 'false');
+            }
+        });
+
         // Page navigation
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -913,18 +1005,13 @@
                             </div>
                         </div>
                         <div class="staff-actions">
-                            <button class="action-btn">Edit</button>
-                            <button class="action-btn deactivate-btn">Deactivate</button>
+                            <button class="staff-action-btn">Edit</button>
+                            <button class="staff-action-btn deactivate-btn">Deactivate</button>
                         </div>
                     </div>
                 </div>
             `).join('');
         }
-
-        // Dark mode toggle
-        document.querySelector('.dark-mode-toggle').addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
 
         // Tab functionality for staff page
         document.querySelectorAll('.tab').forEach(tab => {
