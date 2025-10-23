@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Login</title>
+<style>
+    body {
+        background: linear-gradient(to right, #ff512f, #f09819);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+    }
+    .login-box {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        box-shadow: 0 0 10px #000;
+    }
+    input, button {
+        width: 90%;
+        padding: 10px;
+        margin: 8px;
+        border-radius: 5px;
+        border: none;
+    }
+    button {
+        background-color: #b34700;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="login-box">
+    <h2>Employee Login</h2>
+    <input type="text" id="empId" placeholder="Employee ID">
+    <input type="password" id="empPass" placeholder="Password">
+    <button onclick="employeeLogin()">Login</button>
+    <p id="empMsg"></p>
+</div>
+
+<script>
+function employeeLogin() {
+    const empId = document.getElementById("empId").value.trim();
+    const pass = document.getElementById("empPass").value.trim();
+    const msg = document.getElementById("empMsg");
+
+    if (empId === "" || pass === "") {
+        msg.textContent = "Fields cannot be empty!";
+        msg.style.color = "yellow";
+    } else if (empId === "E101" && pass === "emp123") {
+        msg.textContent = "Login Successful ✅";
+        msg.style.color = "lightgreen";
+    } else {
+        msg.textContent = "Invalid Employee ID or Password ❌";
+        msg.style.color = "red";
+    }
+}
+</script>
+</body>
+</html>
