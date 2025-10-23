@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Login</title>
+<style>
+    body {
+        background: linear-gradient(to right, #0072ff, #00c6ff);
+        font-family: Arial;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+    }
+    .login-box {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 30px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+    }
+    input, button {
+        width: 90%;
+        padding: 10px;
+        margin: 8px;
+        border-radius: 5px;
+        border: none;
+    }
+    button {
+        background-color: #004aad;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="login-box">
+    <h2>Customer Login</h2>
+    <input type="email" id="custEmail" placeholder="Enter Email">
+    <input type="password" id="custPass" placeholder="Enter Password">
+    <button onclick="customerLogin()">Login</button>
+    <p id="custMsg"></p>
+</div>
+
+<script>
+function customerLogin() {
+    const email = document.getElementById("custEmail").value.trim();
+    const pass = document.getElementById("custPass").value.trim();
+    const msg = document.getElementById("custMsg");
+
+    if (email === "" || pass === "") {
+        msg.textContent = "Please fill in all fields!";
+        msg.style.color = "yellow";
+    } else if (email === "jasleen@gmail.com" && pass === "Jasleen123") {
+        msg.textContent = "Welcome back, Customer ✅";
+        msg.style.color = "lightgreen";
+    } else {
+        msg.textContent = "Incorrect email or password ❌";
+        msg.style.color = "red";
+    }
+}
+</script>
+</body>
+</html>
