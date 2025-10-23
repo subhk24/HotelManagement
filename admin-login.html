@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<style>
+    body {
+        background: linear-gradient(to right, #4b0082, #8a2be2);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+    }
+    .login-box {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        box-shadow: 0 0 10px #000;
+    }
+    input {
+        width: 90%;
+        padding: 10px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 5px;
+    }
+    button {
+        background-color: #0d98ad;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="login-box">
+    <h2>Admin Login</h2>
+    <input type="text" id="adminUser" placeholder="Enter Admin Username">
+    <input type="password" id="adminPass" placeholder="Enter Password">
+    <button onclick="adminLogin()">Login</button>
+    <p id="adminMsg"></p>
+</div>
+
+<script>
+function adminLogin() {
+    const user = document.getElementById("adminUser").value.trim();
+    const pass = document.getElementById("adminPass").value.trim();
+    const msg = document.getElementById("adminMsg");
+
+    if (user === "" || pass === "") {
+        msg.textContent = "All fields are required!";
+        msg.style.color = "yellow";
+    } else if (user === "admin" && pass === "admin123") {
+        msg.textContent = "Login Successful ✅";
+        msg.style.color = "lightgreen";
+    } else {
+        msg.textContent = "Invalid credentials ❌";
+        msg.style.color = "red";
+    }
+}
+</script>
+</body>
+</html>
