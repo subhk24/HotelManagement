@@ -6,36 +6,60 @@
 <title>Admin Login</title>
 <style>
     body {
-        background: linear-gradient(to right, #4b0082, #8a2be2);
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        color: white;
+        color: #333;
+        margin: 0;
     }
     .login-box {
-        background: rgba(255, 255, 255, 0.1);
+        background: #ffffff;
         padding: 30px;
-        border-radius: 10px;
-        width: 300px;
+        border-radius: 15px;
+        width: 320px;
         text-align: center;
-        box-shadow: 0 0 10px #000;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+        animation: fadeIn 0.5s ease;
     }
-    input {
+    h2 {
+        color: #6a0dad;
+        margin-bottom: 20px;
+    }
+    input, button {
         width: 90%;
         padding: 10px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 5px;
+        margin: 8px;
+        border-radius: 8px;
+        border: 1.5px solid #6a0dad;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+    }
+    input:focus {
+        border-color: #9b30ff;
+        box-shadow: 0 0 6px rgba(155, 48, 255, 0.4);
     }
     button {
-        background-color: #0d98ad;
+        background-color: #6a0dad;
         color: white;
         border: none;
-        padding: 10px;
-        border-radius: 5px;
         cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+    }
+    button:hover {
+        background-color: #9b30ff;
+    }
+    p {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
     }
 </style>
 </head>
@@ -56,10 +80,10 @@ function adminLogin() {
 
     if (user === "" || pass === "") {
         msg.textContent = "All fields are required!";
-        msg.style.color = "yellow";
+        msg.style.color = "#d17d00";
     } else if (user === "admin" && pass === "admin123") {
         msg.textContent = "Login Successful ✅";
-        msg.style.color = "lightgreen";
+        msg.style.color = "green";
     } else {
         msg.textContent = "Invalid credentials ❌";
         msg.style.color = "red";
