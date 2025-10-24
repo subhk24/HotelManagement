@@ -1,137 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hotel Management System</title>
-  <style>
-    /* --- Purple Overlay for Login Options --- */
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: rgba(120, 0, 200, 0.95);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.4s ease;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Login Role | Hotel Management System</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
     }
 
     .overlay-content {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-      width: 320px;
-      animation: scaleUp 0.4s ease;
+        background: #fff;
+        padding: 40px 50px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+        width: 350px;
+        animation: scaleUp 0.5s ease;
     }
 
-    .overlay h3 {
-      color: #8000c8;
-      margin-bottom: 20px;
-      font-size: 22px;
+    h2 {
+        color: #6a0dad;
+        margin-bottom: 25px;
+        font-size: 24px;
     }
 
     .role-btn {
-      background: #fff;
-      border: 2px solid #8000c8;
-      border-radius: 8px;
-      padding: 12px;
-      width: 100%;
-      margin: 10px 0;
-      font-size: 16px;
-      color: #8000c8;
-      cursor: pointer;
-      transition: 0.3s;
+        background: #fff;
+        border: 2px solid #6a0dad;
+        border-radius: 8px;
+        padding: 12px;
+        width: 100%;
+        margin: 10px 0;
+        font-size: 16px;
+        color: #6a0dad;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: 500;
     }
 
     .role-btn:hover {
-      background: #8000c8;
-      color: white;
-    }
-
-    .close-btn {
-      margin-top: 20px;
-      background: transparent;
-      border: none;
-      color: #8000c8;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+        background: #6a0dad;
+        color: white;
     }
 
     @keyframes scaleUp {
-      from {
-        transform: scale(0.8);
-      }
-      to {
-        transform: scale(1);
-      }
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
     }
-
-    /* Optional: Style your main login button */
-    .login-btn {
-      background-color: #8000c8;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .login-btn:hover {
-      background-color: #9b30ff;
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Your existing website header / navigation -->
-  <header>
-    <h1>Welcome to Hotel Management System</h1>
-    <!-- Existing login button -->
-    <button class="login-btn" onclick="showOverlay()">Login</button>
-  </header>
+<div class="overlay-content">
+    <h2>Select Login Role</h2>
+    <button class="role-btn" onclick="goTo('admin_login.html')">Login as Admin</button>
+    <button class="role-btn" onclick="goTo('customer_login.html')">Login as Customer</button>
+    <button class="role-btn" onclick="goTo('employee_login.html')">Login as Employee</button>
+</div>
 
-  <!-- Purple Overlay for Login Options -->
-  <div class="overlay" id="loginOverlay">
-    <div class="overlay-content">
-      <h3>Select Login Role</h3>
-      <button class="role-btn" onclick="goTo('admin-login.html')">Login as Admin</button>
-      <button class="role-btn" onclick="goTo('customer-login.html')">Login as Customer</button>
-      <button class="role-btn" onclick="goTo('employee-login.html')">Login as Employee</button>
-      <button class="close-btn" onclick="closeOverlay()">✖ Close</button>
-    </div>
-  </div>
+<script>
+function goTo(page) {
+    window.location.href = page;
+}
+</script>
 
-  <script>
-    function showOverlay() {
-      document.getElementById('loginOverlay').style.display = 'flex';
-    }
-
-    function closeOverlay() {
-      document.getElementById('loginOverlay').style.display = 'none';
-    }
-
-    function goTo(page) {
-      window.location.href = page;
-    }
-  </script>
 </body>
 </html>
 
