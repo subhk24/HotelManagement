@@ -7,7 +7,7 @@
 <style>
     body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #00b09b, #96c93d);
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -16,16 +16,17 @@
     }
 
     .signup-container {
-        background: #fff;
+        background: #ffffff;
         padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+        border-radius: 15px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.25);
         width: 380px;
         text-align: center;
+        animation: fadeIn 0.5s ease;
     }
 
     h2 {
-        color: #008f72;
+        color: #6a0dad;
         margin-bottom: 20px;
     }
 
@@ -34,51 +35,60 @@
         text-align: left;
         margin: 10px 0 5px 5px;
         font-weight: 500;
+        color: #333;
     }
 
     input, select {
         width: 100%;
         padding: 10px;
-        border: 1px solid #ccc;
+        border: 1.5px solid #6a0dad;
         border-radius: 8px;
         font-size: 15px;
         outline: none;
+        transition: 0.3s;
     }
 
     input:focus, select:focus {
-        border-color: #00b09b;
+        border-color: #9b30ff;
+        box-shadow: 0 0 6px rgba(155, 48, 255, 0.4);
     }
 
     button {
         width: 100%;
         padding: 12px;
-        background-color: #00b09b;
+        background-color: #6a0dad;
         color: #fff;
         font-size: 16px;
         border: none;
         border-radius: 8px;
         margin-top: 15px;
         cursor: pointer;
-        transition: 0.3s;
+        transition: background 0.3s;
     }
 
     button:hover {
-        background-color: #00947f;
+        background-color: #9b30ff;
     }
 
     .login-link {
         margin-top: 15px;
         font-size: 14px;
+        color: #333;
     }
 
     .login-link a {
-        color: #008f72;
+        color: #6a0dad;
         text-decoration: none;
         font-weight: 600;
     }
 
     .login-link a:hover {
         text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
     }
 </style>
 </head>
@@ -122,21 +132,31 @@
 function registerUser(event) {
     event.preventDefault();
 
-    const name = document.getElementById("fullName").value;
-    const role = document.getElementById("role").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const address = document.getElementById("address").value;
-    const password = document.getElementById("password").value;
+    const name = document.getElementById("fullName").value.trim();
+    const role = document.getElementById("role").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
 
-    if (role === "Admin" || role === "Employee" || role === "Customer") {
-        alert(`${role} Registered Successfully!\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`);
-        document.getElementById("signupForm").reset();
-    } else {
-        alert("Please select a valid role!");
+    if (!role) {
+        alert("⚠️ Please select a valid role!");
+        return;
+    }
+
+    // Show registration success alert
+    alert(`${role} Registered Successfully! 🎉\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`);
+
+    // Redirect based on role
+    if (role === "Admin") {
+        window.location.href = "admin-login.html";
+    } else if (role === "Employee") {
+        window.location.href = "employee-login.html";
+    } else if (role === "Customer") {
+        window.location.href = "customer-login.html";
     }
 }
 </script>
 
 </body>
 </html>
+
+
