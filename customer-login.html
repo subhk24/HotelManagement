@@ -3,39 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Customer Login</title>
+<title>Customer Login | Hotel Management System</title>
 <style>
     body {
-        background: purple;
-        font-family: Arial;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
+        height: 100vh;
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        color: white;
     }
+
     .login-box {
-        background: purple;
-        padding: 30px;
-        border-radius: 10px;
-        width: 300px;
+        background: #fff;
+        padding: 40px 50px;
+        border-radius: 15px;
+        width: 350px;
         text-align: center;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+        animation: scaleUp 0.4s ease;
     }
-    input, button {
-        width: 90%;
-        padding: 10px;
-        margin: 8px;
-        border-radius: 5px;
-        border: none;
+
+    h2 {
+        color: #6a0dad;
+        margin-bottom: 25px;
+        font-size: 24px;
     }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 8px;
+        border: 1.8px solid #6a0dad;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #9b30ff;
+        box-shadow: 0 0 5px rgba(155,48,255,0.5);
+    }
+
     button {
-        background-color:purple;
+        width: 100%;
+        padding: 12px;
+        background: #6a0dad;
         color: white;
+        border: none;
+        border-radius: 8px;
         cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #9b30ff;
+    }
+
+    p {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    @keyframes scaleUp {
+        from {transform: scale(0.85); opacity: 0;}
+        to {transform: scale(1); opacity: 1;}
     }
 </style>
 </head>
 <body>
+
 <div class="login-box">
     <h2>Customer Login</h2>
     <input type="email" id="custEmail" placeholder="Enter Email">
@@ -52,15 +93,16 @@ function customerLogin() {
 
     if (email === "" || pass === "") {
         msg.textContent = "Please fill in all fields!";
-        msg.style.color = "yellow";
+        msg.style.color = "#d17d00";
     } else if (email === "jasleen@gmail.com" && pass === "Jasleen123") {
         msg.textContent = "Welcome back, Customer ✅";
-        msg.style.color = "lightgreen";
+        msg.style.color = "green";
     } else {
         msg.textContent = "Incorrect email or password ❌";
         msg.style.color = "red";
     }
 }
 </script>
+
 </body>
 </html>
