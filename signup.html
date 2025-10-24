@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up | Hotel Management System</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #00b09b, #96c93d);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .signup-container {
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+        width: 380px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #008f72;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        text-align: left;
+        margin: 10px 0 5px 5px;
+        font-weight: 500;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        outline: none;
+    }
+
+    input:focus, select:focus {
+        border-color: #00b09b;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #00b09b;
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #00947f;
+    }
+
+    .login-link {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .login-link a {
+        color: #008f72;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>Register</h2>
+    <form id="signupForm" onsubmit="registerUser(event)">
+        <label>Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter full name" required>
+
+        <label>Role</label>
+        <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="Admin">Admin</option>
+            <option value="Employee">Employee</option>
+            <option value="Customer">Customer</option>
+        </select>
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="Enter email" required>
+
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter phone number" required>
+
+        <label>Address</label>
+        <input type="text" id="address" placeholder="Enter address" required>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Create password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="login-link">
+        Already have an account? <a href="login.html">Login here</a>
+    </div>
+</div>
+
+<script>
+function registerUser(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("fullName").value;
+    const role = document.getElementById("role").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const password = document.getElementById("password").value;
+
+    if (role === "Admin" || role === "Employee" || role === "Customer") {
+        alert(`${role} Registered Successfully!\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`);
+        document.getElementById("signupForm").reset();
+    } else {
+        alert("Please select a valid role!");
+    }
+}
+</script>
+
+</body>
+</html>
