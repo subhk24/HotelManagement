@@ -1,153 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #00b09b, #96c93d);
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        overflow: hidden;
-    }
-
-    .container {
-        background: #fff;
-        padding: 50px 40px;
-        border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        text-align: center;
-        width: 400px;
-        z-index: 2;
-        position: relative;
-    }
-
-    h2 {
-        color: #008f72;
-        margin-bottom: 20px;
-    }
-
-    .login-btn {
-        width: 100%;
-        padding: 12px;
-        background-color: #6f00b0;
-        color: #fff;
-        font-size: 16px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .login-btn:hover {
-        background-color: #740094;
-    }
-
-    /* Purple overlay (hidden by default) */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotel Management System</title>
+  <style>
+    /* --- Purple Overlay for Login Options --- */
     .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: rgba(120, 0, 200, 0.95);
-        z-index: 10;
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 0.4s ease;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(120, 0, 200, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
     }
 
     .overlay-content {
-        background: #fff;
-        padding: 30px 40px;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-        width: 320px;
-        animation: scaleUp 0.4s ease;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      width: 320px;
+      animation: scaleUp 0.4s ease;
     }
 
     .overlay h3 {
-        color: #8000c8;
-        margin-bottom: 20px;
+      color: #8000c8;
+      margin-bottom: 20px;
+      font-size: 22px;
     }
 
     .role-btn {
-        background: #fff;
-        border: 2px solid #8000c8;
-        border-radius: 8px;
-        padding: 12px;
-        width: 100%;
-        margin: 10px 0;
-        font-size: 16px;
-        color: #8000c8;
-        cursor: pointer;
-        transition: 0.3s;
+      background: #fff;
+      border: 2px solid #8000c8;
+      border-radius: 8px;
+      padding: 12px;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+      color: #8000c8;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
     .role-btn:hover {
-        background: #8000c8;
-        color: white;
+      background: #8000c8;
+      color: white;
     }
 
     .close-btn {
-        margin-top: 20px;
-        background: transparent;
-        border: none;
-        color: #8000c8;
-        font-weight: bold;
-        font-size: 15px;
-        cursor: pointer;
+      margin-top: 20px;
+      background: transparent;
+      border: none;
+      color: #8000c8;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
     }
 
     @keyframes fadeIn {
-        from {opacity: 0;}
-        to {opacity: 1;}
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes scaleUp {
-        from {transform: scale(0.8);}
-        to {transform: scale(1);}
+      from {
+        transform: scale(0.8);
+      }
+      to {
+        transform: scale(1);
+      }
     }
-</style>
+
+    /* Optional: Style your main login button */
+    .login-btn {
+      background-color: #8000c8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      background-color: #9b30ff;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Welcome to Hotel Management System</h2>
+  <!-- Your existing website header / navigation -->
+  <header>
+    <h1>Welcome to Hotel Management System</h1>
+    <!-- Existing login button -->
     <button class="login-btn" onclick="showOverlay()">Login</button>
-</div>
+  </header>
 
-<!-- Purple overlay with options -->
-<div class="overlay" id="loginOverlay">
+  <!-- Purple Overlay for Login Options -->
+  <div class="overlay" id="loginOverlay">
     <div class="overlay-content">
-        <h3>Select Login Role</h3>
-        <button class="role-btn" onclick="goTo('admin-login.html')">Login as Admin</button>
-        <button class="role-btn" onclick="goTo('customer-login.html')">Login as Customer</button>
-        <button class="role-btn" onclick="goTo('employee-login.html')">Login as Employee</button>
-        <button class="close-btn" onclick="closeOverlay()">✖ Close</button>
+      <h3>Select Login Role</h3>
+      <button class="role-btn" onclick="goTo('admin-login.html')">Login as Admin</button>
+      <button class="role-btn" onclick="goTo('customer-login.html')">Login as Customer</button>
+      <button class="role-btn" onclick="goTo('employee-login.html')">Login as Employee</button>
+      <button class="close-btn" onclick="closeOverlay()">✖ Close</button>
     </div>
-</div>
+  </div>
 
-<script>
-function showOverlay() {
-    document.getElementById('loginOverlay').style.display = 'flex';
-}
+  <script>
+    function showOverlay() {
+      document.getElementById('loginOverlay').style.display = 'flex';
+    }
 
-function closeOverlay() {
-    document.getElementById('loginOverlay').style.display = 'none';
-}
+    function closeOverlay() {
+      document.getElementById('loginOverlay').style.display = 'none';
+    }
 
-function goTo(page) {
-    window.location.href = page;
-}
-</script>
-
+    function goTo(page) {
+      window.location.href = page;
+    }
+  </script>
 </body>
 </html>
+
