@@ -3,80 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Customer Login | Hotel Management System</title>
+<title>Customer Login</title>
 <style>
     body {
-        font-family: 'Poppins', sans-serif;
         background: linear-gradient(135deg, #6a0dad, #9b30ff);
-        height: 100vh;
-        margin: 0;
+        font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100vh;
+        color: #333;
+        margin: 0;
     }
-
     .login-box {
-        background: #fff;
-        padding: 40px 50px;
+        background: #ffffff;
+        padding: 30px;
         border-radius: 15px;
-        width: 350px;
+        width: 320px;
         text-align: center;
         box-shadow: 0 6px 25px rgba(0,0,0,0.25);
-        animation: scaleUp 0.4s ease;
+        animation: fadeIn 0.5s ease;
     }
-
     h2 {
         color: #6a0dad;
-        margin-bottom: 25px;
-        font-size: 24px;
+        margin-bottom: 20px;
     }
-
-    input {
-        width: 100%;
-        padding: 12px;
-        margin: 10px 0;
+    input, button {
+        width: 90%;
+        padding: 10px;
+        margin: 8px;
         border-radius: 8px;
-        border: 1.8px solid #6a0dad;
+        border: 1.5px solid #6a0dad;
         font-size: 15px;
         outline: none;
         transition: 0.3s;
     }
-
     input:focus {
         border-color: #9b30ff;
-        box-shadow: 0 0 5px rgba(155,48,255,0.5);
+        box-shadow: 0 0 6px rgba(155, 48, 255, 0.4);
     }
-
     button {
-        width: 100%;
-        padding: 12px;
-        background: #6a0dad;
+        background-color: #6a0dad;
         color: white;
         border: none;
-        border-radius: 8px;
         cursor: pointer;
         font-size: 16px;
-        margin-top: 10px;
-        transition: 0.3s;
+        transition: background 0.3s;
     }
-
     button:hover {
-        background: #9b30ff;
+        background-color: #9b30ff;
     }
-
     p {
-        margin-top: 15px;
+        margin-top: 10px;
         font-size: 14px;
     }
-
-    @keyframes scaleUp {
-        from {transform: scale(0.85); opacity: 0;}
-        to {transform: scale(1); opacity: 1;}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
     }
 </style>
 </head>
 <body>
-
 <div class="login-box">
     <h2>Customer Login</h2>
     <input type="email" id="custEmail" placeholder="Enter Email">
@@ -103,6 +90,5 @@ function customerLogin() {
     }
 }
 </script>
-
 </body>
 </html>
