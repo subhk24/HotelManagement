@@ -7,10 +7,16 @@
 <link rel="stylesheet" href="style2.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
+  <div class="welcome-bar">
+    <div class="welcome-text">Book your perfect stay today</div>
+    <div class="contact-info">Contact: support@staynest.com</div>
+  </div>
+
   <header>
     <div class="logo">
-      <img src="logo.png" alt="StayNest">
+      <span class="stay">Stay</span><span class="nest">Nest</span>
     </div>
     <div class="nav-left">
       <a href="index.html">Home</a>
@@ -18,39 +24,37 @@
       <a href="#">Account</a>
       <a href="#">Blog</a>
       <a href="pages.html">Pages</a>
+      <a href="#">Cart</a>
+      <a href="#">Dashboard</a>
     </div>
 
     <div class="nav-right">
-      <button>Cart</button>
-      <button>Dashboard</button>
-      <a href="login-selection.html"><button>Login</button></a>
-      <a href="signup.html"><button>Sign-Up</button></a>
-      
+      <a href="#loginModal"><button>Login</button></a>
+      <a href="#signupModal"><button>Sign Up</button></a>
     </div>
   </header>
- <div class="content">
-<section class="hero">
-  <div class="hero-content">
-    <h1>Book Unique Experiences</h1>
-    <p>Discover top rated hotels, shops and restaurants around the world</p>
-    <div class="search-bar">
-      <input type="text" placeholder="Hotel, City...">
-      <input type="date" placeholder="Select Booking Date">
-      <select>
-        
-        <option>All Categories</option>
-        <option>Hotels</option>
-        <option>Restaurants</option>
-        <option>Shops</option>
-      </select>
-      <button>Search</button>
-    </div>
+
+  <div class="content">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Book Unique Experiences</h1>
+        <p>Discover top rated hotels, shops and restaurants around the world</p>
+        <div class="search-bar">
+          <input type="text" placeholder="Hotel, City...">
+          <input type="date" placeholder="Select Booking Date">
+          <select>
+            <option>All Categories</option>
+            <option>Hotels</option>
+            <option>Restaurants</option>
+            <option>Shops</option>
+          </select>
+          <button>Search</button>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
 
-  </div>
-
-
+  <!-- Offers Section -->
   <section class="offers">
     <h2>Offers for you</h2>
     <div class="offers-container">
@@ -62,10 +66,7 @@
         </div>
         </a>
       
-
-   
-
-      <a href="regenta.html" class="offer-card">
+        <a href="regenta.html" class="offer-card">
         <img src="image3.jpg" alt="Pilgrimage Offer">
         <div class="offer-content">
           <h3>Pilgrimage Special: Food, stay & more!</h3>
@@ -73,16 +74,13 @@
         </div>
         </a>
     
-
-      <a href="regenta.html" class="offer-card">
+        <a href="regenta.html" class="offer-card">
         <img src="image4.jpg" alt="Luxury Hotel">
         <div class="offer-content">
           <h3>Luxury Hotels at Best Prices</h3>
           <p>Valid till: 31st Aug '25</p>
         </div>
       </a>
-
-      
 
       <a href="regenta.html" class="offer-card">
         <img src="image5.jpg" alt="Luxury Hotel">
@@ -102,49 +100,45 @@
     </div>
   </section>
 
-
+  <!-- Destinations Section -->
   <section class="destinations">
-  <div class="tabs-wrapper">
-    <div class="tabs">
-      <button class="tab active">Beach Vacations</button>
-
-      <button class="tab">Weekend Getaways</button>
-      <button class="tab">Mountains Calling</button>
-      <button class="tab">Stay Like Royals</button>
-      <button class="tab">Indian Pilgrimages</button>
-      <button class="tab">Party Destinations</button>
+    <div class="tabs-wrapper">
+      <div class="tabs">
+        <button class="tab active">Beach Vacations</button>
+        <button class="tab">Weekend Getaways</button>
+        <button class="tab">Mountains Calling</button>
+        <button class="tab">Stay Like Royals</button>
+        <button class="tab">Indian Pilgrimages</button>
+        <button class="tab">Party Destinations</button>
+      </div>
     </div>
-  </div>
 
-  <div class="destinations-container">
-    <div class="destination-card">
-      <img src="maldives.jpg" alt="Maldives">
-      <h3>Maldives</h3>
+    <div class="destinations-container">
+      <div class="destination-card">
+        <img src="maldives.jpg" alt="Maldives">
+        <h3>Maldives</h3>
+      </div>
+      <div class="destination-card">
+        <img src="krabi.jpg" alt="Krabi">
+        <h3>Krabi</h3>
+      </div>
+      <div class="destination-card">
+        <img src="phuket.jpg" alt="Phuket">
+        <h3>Phuket</h3>
+      </div>
+      <div class="destination-card">
+        <img src="langkawi.jpg" alt="Langkawi">
+        <h3>Langkawi</h3>
+      </div>
+      <div class="destination-card">
+        <img src="goa.jpg" alt="Goa">
+        <h3>Goa</h3>
+      </div>
     </div>
-    <div class="destination-card">
-      <img src="krabi.jpg" alt="Krabi">
-      <h3>Krabi</h3>
-    </div>
-    <div class="destination-card">
-      <img src="phuket.jpg" alt="Phuket">
-      <h3>Phuket</h3>
-    </div>
-    <div class="destination-card">
-      <img src="langkawi.jpg" alt="Langkawi">
-      <h3>Langkawi</h3>
-    </div>
-    <div class="destination-card">
-      <img src="goa.jpg" alt="Goa">
-      <h3>Goa</h3>
-    </div>
-  </div>
-</section>
+  </section>
 
-
-
-
-
-<h2 class="heading">Popular Destinations</h2>
+  <!-- Popular Destinations Section -->
+  <h2 class="heading">Popular Destinations</h2>
   <p class="child">We have selected some best locations around the world for you.</p>
   <br>
 
@@ -204,9 +198,10 @@
     </a>
   </div>
 
-<br><br><br>
+  <!-- Domestic Destinations Section -->
+  <br><br><br>
   <h2 class="simple">Top domestic destinations</h2>
-<br>
+  <br>
   <div class="domestic">
     <a href="#">Nangi Hotels</a>
     <a href="#">Goa Hotels</a>
@@ -220,8 +215,8 @@
     <a href="#">Manali Hotels</a>
   </div>
 
-<br><br><hr>
-
+  <!-- FAQ Section -->
+  <br><br><hr>
 
   <div class="faq-container">
     <div class="faq">
@@ -247,11 +242,11 @@
     <div class="faq">
       <h3>Q. How to find the best hotels near me?</h3>
       <p>A. If you are travelling to a city for the first time and are looking for hotels in the best areas, it is easy
-      to find them on our website and our app. Let’s say, you are going to Goa and planning to book one near
+      to find them on our website and our app. Let's say, you are going to Goa and planning to book one near
       the most happening beaches. Once you have hit the Search option, you will find a list of all the hotels
       in North Goa near the famed beach areas including Baga and Calangute. You can even find out which
       of the areas are ideal for couples and families. Similarly, if you are looking for booking hotels in
-      Mumbai, you can either book ones that are near the city’s major business districts, tourist areas and
+      Mumbai, you can either book ones that are near the city's major business districts, tourist areas and
       transportation hubs.</p>
     </div>
 
@@ -260,82 +255,29 @@
       <p>A. MakeMyTrip offers plenty of deals and offers on luxury and budget hotels in India in all the cities,
       on a daily basis. However, these are available for a limited time and they are subject to change the
       next day. You can look for these deals while you are about to book the hotel after narrowing down
-      your choices. On the app, you can check a property that has ‘MMT Exclusive Deal’ button below its
+      your choices. On the app, you can check a property that has 'MMT Exclusive Deal' button below its
       discounted rate. By tapping on it, you would know how many offers are available.</p>
     </div>
   </div>
 
-<div id="loginModal" class="overlay">
-  <div class="container">
-    <a href="#" class="close">&times;</a>
-    <h2>Login/Signup</h2>
-    <form action="nextpage.html">
-      <label for="phone">Enter your Mobile Number</label>
-      <div class="phone-box">
-        <span class="prefix">+91</span>
-        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="10 digit number">
-      </div>
-    
-      <a href="#detailsModal" class="btn"><button>Continue</button>
-      </a>
-    </form>
-    <p class="terms">
-      By proceeding, you agree to our 
-      <a href="#">Privacy Policy</a>, 
-      <a href="#">User Agreement</a> and 
-      <a href="#">Terms of Service</a>.
-    </p>
-  </div>
-</div>
-
-
-
-<div id="detailsModal" class="modal">
-    <div class="modal-content">
-      <div class="success-box">Congratulations! Your account is created.</div>
-
-     
-      <form action="index.html" method="get">
-        <input type="text" placeholder="Full Name" class="input-box" required>
-        <input type="email" placeholder="Email" class="input-box" required>
-        <input type="text" placeholder="City" class="input-box" required>
-
-
-        <div style="text-align:left; margin:10px 0;">
-          Gender:<br>
-          <label><input type="radio" name="gender" required> Male</label>
-          <label><input type="radio" name="gender"> Female</label>
-          <label><input type="radio" name="gender"> Others</label>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">StayNest</div>
+            <h2 style="margin-bottom: 15px; color: #a03ce7;">About Us</h2>
+            <div class="footer-links">
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="copyright">
+                © 2025 StayNest. All rights reserved. | Book your perfect stay with us
+            </div>
         </div>
-
-       
-        <button type="submit" class="btn" >Let's Go</button>
-        <button type="button" class="btn" onclick="window.location.href='index.html'">I'll do it later</button>
-      </form>
-    </div>
-  </div>
-
-
-
-
- <footer>
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-x-twitter"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-    </div>
-    <div class="copyright">
-      © 2025 STAYNEST PVT. LTD.
-    </div>
-  </footer>
-
-
-
+    </footer>
 </body>
 </html>
 
-  
 
 
 
