@@ -6,57 +6,341 @@
 <title>Indian Hotels Blog | StayNest</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-  body { background:#f7f5fc; color:#333; line-height:1.6; }
-  a { text-decoration:none; color:inherit; }
+  /* Reset & Basic */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-  header { background:#6a0dad; color:white; padding:20px 0; text-align:center; }
-  header h1 { font-size:2rem; }
-  header p { margin-top:5px; font-size:1rem; color:#f3e5ff; }
+body {
+    background-color: #faf9ff;
+    color: #333;
+    line-height: 1.6;
+}
 
-  .container { max-width:1200px; margin:30px auto; padding:0 20px; }
+/* Top Bar */
+.top-bar {
+    background-color: #000;
+    color: white;
+    padding: 8px 0;
+    font-size: 0.9rem;
+}
 
-  /* Hero Section */
-  .hero { display:flex; flex-wrap:wrap; gap:20px; margin-bottom:40px; }
-  .hero img { flex:1 1 50%; border-radius:15px; max-height:400px; object-fit:cover; }
-  .hero-content { flex:1 1 45%; display:flex; flex-direction:column; justify-content:center; }
-  .hero-content h2 { font-size:2rem; margin-bottom:15px; color:#6a0dad; }
-  .hero-content p { margin-bottom:20px; color:#555; }
-  .hero-content a { background:#6a0dad; color:white; padding:10px 20px; border-radius:8px; transition:.3s; display:inline-block; }
-  .hero-content a:hover { background:#9b30ff; }
+.top-bar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
 
-  /* Blog Cards */
-  .blog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
-  .blog-card { background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1); transition:.3s; }
-  .blog-card:hover { transform:translateY(-5px); }
-  .blog-card img { width:100%; height:180px; object-fit:cover; }
-  .blog-content { padding:15px; }
-  .blog-content h3 { color:#6a0dad; margin-bottom:10px; font-size:1.2rem; }
-  .blog-content p { color:#555; font-size:0.95rem; margin-bottom:10px; }
-  .blog-content .btn { display:inline-block; background:#6a0dad; color:white; padding:6px 14px; border-radius:6px; transition:.3s; font-size:0.9rem; }
-  .blog-content .btn:hover { background:#9b30ff; }
+/* Header Navigation — KEEPING SAME AS BEFORE */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-  /* Categories */
-  .categories { margin-bottom:30px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-  .categories button { padding:6px 12px; border:none; border-radius:8px; background:#eee; cursor:pointer; transition:.3s; }
-  .categories button.active, .categories button:hover { background:#6a0dad; color:white; }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
 
-  /* Footer */
-  footer { background:#6a0dad; color:white; text-align:center; padding:20px 0; margin-top:40px; }
-  footer p { font-size:0.9rem; }
+.logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+}
 
-  @media(max-width:768px){
-    .hero { flex-direction:column; }
-    .hero img, .hero-content { flex:1 1 100%; }
-  }
+.logo span {
+    color: #a03ce7;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #a03ce7;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-login {
+    background-color: #a03ce7;  
+    color: #fff;                
+    border: 1px solid #a03ce7;
+}
+
+.btn-login:hover {
+    background-color: #8a2fc9;   
+}
+
+.btn-signup {
+    background-color: #a03ce7;
+    color: white;
+    border: 1px solid #a03ce7;
+}
+
+.btn-signup:hover {
+    background-color: #8a2fc9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+
+    .auth-buttons {
+        margin-top: 15px;
+    }
+}
+
+/* Page Heading (Centered & Stylish) */
+.page-heading {
+  text-align: center;
+  margin: 60px auto 40px;
+  padding: 0 20px;
+  animation: fadeIn 1s ease;
+}
+
+.page-heading h1 {
+  font-size: 2.5rem;
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+.page-heading h1 span {
+  color: #a03ce7;
+}
+
+.page-heading p {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Container */
+.container { 
+  max-width:1200px; 
+  margin:30px auto; 
+  padding:0 20px; 
+}
+
+/* Hero Section */
+.hero { 
+  display:flex; 
+  flex-wrap:wrap; 
+  gap:30px; 
+  margin-bottom:50px; 
+  align-items:center;
+}
+.hero img { 
+  flex:1 1 50%; 
+  border-radius:15px; 
+  max-height:400px; 
+  object-fit:cover; 
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+.hero-content { 
+  flex:1 1 45%; 
+}
+.hero-content h2 { 
+  font-size:2rem; 
+  margin-bottom:15px; 
+  color:#6a0dad; 
+}
+.hero-content p { 
+  margin-bottom:20px; 
+  color:#555; 
+}
+.hero-content a { 
+  background:#6a0dad; 
+  color:white; 
+  padding:10px 20px; 
+  border-radius:30px; 
+  transition:.3s; 
+  display:inline-block; 
+  text-decoration:none; 
+  font-weight:500;
+}
+.hero-content a:hover { 
+  background:#9b30ff; 
+}
+
+/* Categories */
+.categories { 
+  margin-bottom:40px; 
+  display:flex; 
+  flex-wrap:wrap; 
+  gap:12px; 
+  justify-content:center; 
+}
+.categories button { 
+  padding:8px 16px; 
+  border:none; 
+  border-radius:25px; 
+  background:#eee; 
+  cursor:pointer; 
+  transition:.3s; 
+  font-weight:500;
+}
+.categories button.active, 
+.categories button:hover { 
+  background:#6a0dad; 
+  color:white; 
+}
+
+/* Blog Cards */
+.blog-grid { 
+  display:grid; 
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); 
+  gap:25px; 
+}
+.blog-card { 
+  background:#fff; 
+  border-radius:15px; 
+  overflow:hidden; 
+  box-shadow:0 4px 15px rgba(0,0,0,0.08); 
+  transition:transform .3s, box-shadow .3s;
+}
+.blog-card:hover { 
+  transform:translateY(-6px); 
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+.blog-card img { 
+  width:100%; 
+  height:190px; 
+  object-fit:cover; 
+}
+.blog-content { 
+  padding:18px; 
+}
+.blog-content h3 { 
+  color:#6a0dad; 
+  margin-bottom:10px; 
+  font-size:1.2rem; 
+}
+.blog-content p { 
+  color:#555; 
+  font-size:0.95rem; 
+  margin-bottom:15px; 
+}
+.blog-content .btn { 
+  display:inline-block; 
+  background:#6a0dad; 
+  color:white; 
+  padding:8px 16px; 
+  border-radius:25px; 
+  font-size:0.9rem; 
+}
+.blog-content .btn:hover { 
+  background:#9b30ff; 
+}
+
+/* Footer */
+footer { 
+  background:#6a0dad; 
+  color:white; 
+  text-align:center; 
+  padding:25px 0; 
+  margin-top:50px; 
+}
+footer p { font-size:0.9rem; }
+
+/* Responsive */
+@media(max-width:768px){
+  .hero { flex-direction:column; }
+  .hero img, .hero-content { flex:1 1 100%; }
+  .page-heading h1 { font-size:2rem; }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1; transform:translateY(0);}
+}
 </style>
 </head>
 <body>
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="top-bar-content">
+        <div>Welcome to StayNest - Book your perfect stay today!</div>
+        <div>Contact: support@staynest.com</div>
+    </div>
+</div>
 
+<!-- Header Navigation (unchanged) -->
 <header>
-  <h1>StayNest India Hotels Blog</h1>
-  <p>Explore the best Indian hotels and their stories</p>
+    <div class="nav-container">
+        <div class="logo">Stay<span>Nest</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Hotels</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#">Cart</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-login">Login</a>
+            <a href="#" class="btn btn-signup">Sign Up</a>
+        </div>
+    </div>
 </header>
+
+<!-- Centered Heading -->
+<section class="page-heading">
+  <h1>Welcome to the <span>StayNest</span> India Hotels Blog</h1>
+  <p>Explore the finest hotels, resorts, and heritage stays across India — curated just for you.</p>
+</section>
 
 <div class="container">
   <!-- Hero Featured Blog -->
@@ -79,9 +363,7 @@
   </div>
 
   <!-- Blog Cards -->
-  <div class="blog-grid" id="blogGrid">
-    <!-- JS will populate blog cards here -->
-  </div>
+  <div class="blog-grid" id="blogGrid"></div>
 </div>
 
 <footer>
@@ -89,19 +371,16 @@
 </footer>
 
 <script>
-// Sample Indian hotels blog data
 const blogs = [
   {id:1, title:'Royal Heritage Hotels of Jaipur', desc:'Step into the royal past with luxury heritage hotels in Jaipur.', category:'Heritage', img:'https://s7ap1.scene7.com/is/image/incredibleindia/hawa-mahal-jaipur-rajasthan-city-1-hero?qlt=82&ts=1742200253577'},
-  {id:2, title:'Beach Resorts in Goa', desc:'Relax on the sunny beaches of Goa while staying at top beach resorts.', category:'Beach', img:'goa.jpg'},
-  {id:3, title:'Luxury Stays in Mumbai', desc:'Discover Mumbai\'s top luxury hotels for a premium city experience.', category:'Luxury', img:'mumbai.jpg'},
+  {id:2, title:'Beach Resorts in Goa', desc:'Relax on the sunny beaches of Goa while staying at top beach resorts.', category:'Beach', img:'https://www.clubmahindra.com/blog/media/section_images/shuttersto-609527c65b4c3e2.jpg'},
+  {id:3, title:'Luxury Stays in Mumbai', desc:'Discover Mumbai\'s top luxury hotels for a premium city experience.', category:'Luxury', img:'https://media-cdn.tripadvisor.com/media/photo-s/1c/47/02/0a/the-taj-mahal-palace.jpg'},
   {id:4, title:'Budget Hotels in Delhi', desc:'Affordable stays with great amenities in India\'s capital city.', category:'Budget', img:'https://www.itchotels.com/content/dam/itchotels/in/umbrella/fortune/hotel-listing/hotel-card-listing/fortunepark-delhi.jpg'},
-  {id:5, title:'Palace Hotels in Udaipur', desc:'Live like royalty in Udaipur\'s majestic palace hotels.', category:'Heritage', img:'udaipur.jpg'},
-  {id:6, title:'Luxury Hotels in Bengaluru', desc:'Experience modern luxury and comfort in the tech city of Bengaluru.', category:'Luxury', img:'bengaluru.jpg'},
-  {id:7, title:'Hilltop Hotels in Manali', desc:'Enjoy serene views and cozy stays in the mountains of Manali.', category:'Luxury', img:'manali.jpg'}
+  {id:5, title:'Palace Hotels in Udaipur', desc:'Live like royalty in Udaipur\'s majestic palace hotels.', category:'Heritage', img:'https://media-cdn.tripadvisor.com/media/photo-s/22/2e/e2/dc/swaroop-vilas-boutique.jpghttps://static.toiimg.com/photo/93079119.cms'},
+  {id:6, title:'Luxury Hotels in Bengaluru', desc:'Experience modern luxury and comfort in the tech city of Bengaluru.', category:'Luxury', img:'https://media.cntraveller.in/wp-content/uploads/2017/02/the-oberoi-bengaluru-1366x768.jpg'},
+  {id:7, title:'Hilltop Hotels in Manali', desc:'Enjoy serene views and cozy stays in the mountains of Manali.', category:'Luxury', img:'https://www.clubmahindra.com/blog/media/section_images/shuttersto-609524a02b8e783.jpg'}
 ];
 
-
-// Render blog cards
 const blogGrid = document.getElementById('blogGrid');
 
 function renderBlogs(filteredBlogs){
@@ -121,7 +400,6 @@ function renderBlogs(filteredBlogs){
   });
 }
 
-// Filter by category
 function filterCategory(cat){
   document.querySelectorAll('.categories button').forEach(btn=>btn.classList.remove('active'));
   event.target.classList.add('active');
@@ -129,9 +407,7 @@ function filterCategory(cat){
   else renderBlogs(blogs.filter(b=>b.category===cat));
 }
 
-// Initialize
 renderBlogs(blogs);
 </script>
-
 </body>
 </html>
