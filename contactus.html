@@ -1,40 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - My Website</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css"> <!-- External CSS -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Hotel Booking</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
+        color: #333;
+    }
+
+    .contact-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 50px 20px;
+    }
+
+    .contact-container {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        max-width: 1100px;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .contact-info {
+        flex: 1;
+        background: #6a0dad;
+        color: white;
+        padding: 50px 40px;
+    }
+
+    .contact-info h2 {
+        font-size: 26px;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .contact-info p {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 25px;
+        color: #e0d6f7;
+    }
+
+    .info-item {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+    }
+
+    .info-item i {
+        font-size: 20px;
+        margin-right: 15px;
+        color: #ffd700;
+    }
+
+    .contact-form {
+        flex: 1;
+        padding: 50px 40px;
+    }
+
+    .contact-form h2 {
+        color: #6a0dad;
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    .contact-form form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form label {
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        margin-bottom: 20px;
+        padding: 12px;
+        border: 1.5px solid #6a0dad;
+        border-radius: 8px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        border-color: #9b30ff;
+        box-shadow: 0 0 6px rgba(155, 48, 255, 0.4);
+    }
+
+    .contact-form textarea {
+        resize: none;
+        height: 120px;
+    }
+
+    .contact-form button {
+        background: #6a0dad;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+        background: #9b30ff;
+    }
+
+    @media (max-width: 900px) {
+        .contact-container {
+            flex-direction: column;
+        }
+        .contact-info, .contact-form {
+            width: 100%;
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Contact Us</h1>
-  </header>
 
-  <div class="container">
-    <h2>Get in Touch</h2>
-    <p>If you have any questions, feel free to reach out using the contact details below or by filling out the form.</p>
+<section class="contact-section">
+    <div class="contact-container">
+        <!-- Left side - Info -->
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>We’d love to hear from you! Whether you’re planning your next stay or have questions about our services, our team is always here to help.</p>
 
-    <div class="contact-info">
-      <p><i class="fas fa-envelope"></i> Email: info@staynest.com</p>
-      <p><i class="fas fa-phone"></i> Phone: +91 98765 43210</p>
+            <div class="info-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>123 Orchid Street, Amethyst City, India</span>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>+91 98765 43210</span>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>contact@staynesthotel.com</span>
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-globe"></i>
+                <span>www.staynesthotel.com</span>
+            </div>
+        </div>
+
+        <!-- Right side - Form -->
+        <div class="contact-form">
+            <h2>Send a Message</h2>
+            <form id="contactForm" onsubmit="sendMessage(event)">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Write your message..." required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </div>
+</section>
 
-    <form>
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
+<script>
+function sendMessage(event) {
+    event.preventDefault();
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" required></textarea>
+    if (message.length < 10) {
+        alert("⚠️ Message should be at least 10 characters long.");
+        return;
+    }
 
-      <button type="submit">Send Message</button>
-    </form>
+    alert(`✅ Thank you, ${name}!\n\nYour message has been sent successfully.\nWe'll get back to you at ${email} soon.`);
+    
+    // Clear form
+    document.getElementById("contactForm").reset();
+}
+</script>
 
-    <a href="pages.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
-  </div>
 </body>
 </html>
