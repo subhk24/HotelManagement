@@ -6,27 +6,30 @@
 <title>My Hotel Dashboard | StayNest</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
-  body {background:#f7f5fc; color:#333; padding:20px; min-height:100vh;}
-  h1 {color:#6a0dad; text-align:center; margin-bottom:25px;}
-  .cards {display:flex; justify-content:space-around; flex-wrap:wrap; margin-bottom:30px;}
-  .card {background:#fff; border-radius:15px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.1); width:250px; text-align:center; transition:0.3s;}
-  .card:hover {transform:translateY(-5px);}
-  .card i {font-size:35px; color:#6a0dad; margin-bottom:10px;}
-  .section {margin-bottom:30px;}
-  h3 {color:#6a0dad; margin-bottom:15px;}
-  .table-container {background:#fff; border-radius:15px; padding:20px; box-shadow:0 5px 15px rgba(0,0,0,0.1);}
-  table {width:100%; border-collapse:collapse; margin-top:10px;}
-  th, td {padding:12px; text-align:center; border-bottom:1px solid #eee;}
-  th {background:#6a0dad; color:#fff;}
-  tr:hover {background:#f2e8ff;}
-  button {padding:6px 12px; border:none; border-radius:6px; cursor:pointer; transition:0.3s;}
-  .delete-btn {background:#dc2626; color:#fff;}
-  .delete-btn:hover {background:#ff4c4c;}
-  .add-btn {background:#6a0dad; color:#fff;}
-  .add-btn:hover {background:#9b30ff;}
-  .search-container {margin-bottom:15px; display:flex; gap:10px; flex-wrap:wrap;}
-  .search-container input, .search-container select {padding:8px 10px; border-radius:6px; border:1.5px solid #6a0dad; outline:none;}
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+body {background:#f7f5fc; color:#333; padding:20px; min-height:100vh;}
+h1 {color:#6a0dad; text-align:center; margin-bottom:30px;}
+.cards {display:flex; justify-content:space-around; flex-wrap:wrap; margin-bottom:30px;}
+.card {background:#fff; border-radius:15px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.1); width:250px; text-align:center; transition:0.3s;}
+.card:hover {transform:translateY(-5px);}
+.card i {font-size:35px; color:#6a0dad; margin-bottom:10px;}
+.section {margin-bottom:30px;}
+h3 {color:#6a0dad; margin-bottom:15px;}
+.table-container {background:#fff; border-radius:15px; padding:20px; box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+table {width:100%; border-collapse:collapse; margin-top:10px;}
+th, td {padding:12px; text-align:center; border-bottom:1px solid #eee;}
+th {background:#6a0dad; color:#fff;}
+tr:hover {background:#f2e8ff;}
+button {padding:6px 12px; border:none; border-radius:6px; cursor:pointer; transition:0.3s;}
+.delete-btn {background:#dc2626; color:#fff;}
+.delete-btn:hover {background:#ff4c4c;}
+.view-btn {background:#6a0dad; color:#fff;}
+.view-btn:hover {background:#9b30ff;}
+.add-btn {background:#6a0dad; color:#fff;}
+.add-btn:hover {background:#9b30ff;}
+.search-container {margin-bottom:15px; display:flex; gap:10px; flex-wrap:wrap;}
+.search-container input {padding:8px 10px; border-radius:6px; border:1.5px solid #6a0dad; outline:none;}
+.hotel-img {width:100px; border-radius:8px;}
 </style>
 </head>
 <body>
@@ -35,14 +38,9 @@
 
 <div class="cards">
   <div class="card">
-    <i class="fas fa-history"></i>
-    <h3 id="pastCount">0</h3>
-    <p>Past Bookings</p>
-  </div>
-  <div class="card">
-    <i class="fas fa-calendar-check"></i>
-    <h3 id="currentCount">0</h3>
-    <p>Current / Future Bookings</p>
+    <i class="fas fa-bed"></i>
+    <h3 id="bookingCount">0</h3>
+    <p>Total Bookings</p>
   </div>
   <div class="card">
     <i class="fas fa-heart"></i>
@@ -54,7 +52,7 @@
 <div class="section table-container">
   <h3>My Bookings</h3>
   <div class="search-container">
-    <input type="text" id="searchBooking" placeholder="Search by hotel name or status">
+    <input type="text" id="searchBooking" placeholder="Search bookings by hotel name or location">
   </div>
   <table id="bookingTable">
     <thead>
@@ -62,7 +60,10 @@
         <th>Hotel</th>
         <th>Check-In</th>
         <th>Check-Out</th>
-        <th>Status</th>
+        <th>Guests</th>
+        <th>Rooms</th>
+        <th>Price / Night</th>
+        <th>Total Price</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -90,47 +91,53 @@
 </div>
 
 <script>
+// Sample bookings from your index.html hotels
 let bookings = [
-  {id:1, hotel:'Taj Palace', checkIn:'2025-09-10', checkOut:'2025-09-12', status:'Past'},
-  {id:2, hotel:'Leela Hotel', checkIn:'2025-10-20', checkOut:'2025-10-25', status:'Current'},
-  {id:3, hotel:'Hyatt Regency', checkIn:'2025-11-15', checkOut:'2025-11-18', status:'Future'}
+  {id:1, hotel:'Regenta Hotel', location:'Jaipur', img:'image2.jpg', checkIn:'2025-09-10', checkOut:'2025-09-12', guests:2, rooms:1, price:5000},
+  {id:2, hotel:'Taj Hotels', location:'NCR', img:'image5.jpg', checkIn:'2025-10-20', checkOut:'2025-10-25', guests:3, rooms:2, price:8000},
+  {id:3, hotel:'Leela Hotel', location:'Bengaluru', img:'image3.jpg', checkIn:'2025-11-15', checkOut:'2025-11-18', guests:1, rooms:1, price:6000}
 ];
 
+// Saved hotels from your index.html
 let savedHotels = [
-  {id:1, hotel:'JW Marriott', location:'Mumbai', price:12000},
-  {id:2, hotel:'ITC Grand', location:'Delhi', price:9000}
+  {id:1, hotel:'JW Marriott', location:'Mumbai', price:12000, img:'image4.jpg'},
+  {id:2, hotel:'ITC Grand', location:'Delhi', price:9000, img:'image6.jpg'}
 ];
 
 // Render counts
 function renderCounts() {
-  const past = bookings.filter(b => b.status==='Past').length;
-  const current = bookings.filter(b => b.status==='Current' || b.status==='Future').length;
-  document.getElementById('pastCount').textContent = past;
-  document.getElementById('currentCount').textContent = current;
+  document.getElementById('bookingCount').textContent = bookings.length;
   document.getElementById('savedCount').textContent = savedHotels.length;
 }
 
-// Render bookings table
+// Render bookings
 function renderBookings() {
   const tbody = document.querySelector('#bookingTable tbody');
   tbody.innerHTML = '';
   const search = document.getElementById('searchBooking').value.toLowerCase();
-
-  bookings.filter(b => b.hotel.toLowerCase().includes(search) || b.status.toLowerCase().includes(search))
-  .forEach(b => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${b.hotel}</td>
-                    <td>${b.checkIn}</td>
-                    <td>${b.checkOut}</td>
-                    <td>${b.status}</td>
-                    <td><button class="delete-btn" onclick="deleteBooking(${b.id})">Delete</button></td>`;
-    tbody.appendChild(tr);
+  bookings.filter(b => b.hotel.toLowerCase().includes(search) || b.location.toLowerCase().includes(search))
+    .forEach(b => {
+      const nights = (new Date(b.checkOut) - new Date(b.checkIn)) / (1000*60*60*24);
+      const totalPrice = b.price * nights * b.rooms;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><img src="${b.img}" alt="hotel" class="hotel-img"> ${b.hotel}<br><small>${b.location}</small></td>
+                      <td>${b.checkIn}</td>
+                      <td>${b.checkOut}</td>
+                      <td>${b.guests}</td>
+                      <td>${b.rooms}</td>
+                      <td>₹${b.price}</td>
+                      <td>₹${totalPrice}</td>
+                      <td>
+                        <button class="view-btn">View</button>
+                        <button class="delete-btn" onclick="deleteBooking(${b.id})">Cancel</button>
+                      </td>`;
+      tbody.appendChild(tr);
   });
 }
 
 // Delete booking
 function deleteBooking(id) {
-  if(confirm('Are you sure you want to delete this booking?')) {
+  if(confirm('Are you sure you want to cancel this booking?')) {
     bookings = bookings.filter(b => b.id !== id);
     renderCounts();
     renderBookings();
@@ -142,15 +149,14 @@ function renderSaved() {
   const tbody = document.querySelector('#savedTable tbody');
   tbody.innerHTML = '';
   const search = document.getElementById('searchSaved').value.toLowerCase();
-
-  savedHotels.filter(h => h.hotel.toLowerCase().includes(search))
-  .forEach(h => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${h.hotel}</td>
-                    <td>${h.location}</td>
-                    <td>₹${h.price}</td>
-                    <td><button class="delete-btn" onclick="deleteSaved(${h.id})">Remove</button></td>`;
-    tbody.appendChild(tr);
+  savedHotels.filter(h => h.hotel.toLowerCase().includes(search) || h.location.toLowerCase().includes(search))
+    .forEach(h => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><img src="${h.img}" alt="hotel" class="hotel-img"> ${h.hotel}</td>
+                      <td>${h.location}</td>
+                      <td>₹${h.price}</td>
+                      <td><button class="delete-btn" onclick="deleteSaved(${h.id})">Remove</button></td>`;
+      tbody.appendChild(tr);
   });
 }
 
@@ -163,7 +169,7 @@ function deleteSaved(id) {
   }
 }
 
-// Add saved hotel (prompt)
+// Add saved hotel
 function addSavedHotel() {
   const hotel = prompt('Enter Hotel Name:');
   if(!hotel) return;
@@ -171,7 +177,8 @@ function addSavedHotel() {
   if(!location) return;
   const price = prompt('Enter Price per Night:');
   if(!price) return;
-  savedHotels.push({id:Date.now(), hotel, location, price});
+  const img = prompt('Enter Image URL (optional):') || 'image2.jpg';
+  savedHotels.push({id:Date.now(), hotel, location, price, img});
   renderCounts();
   renderSaved();
 }
