@@ -486,21 +486,23 @@
     }
 
     .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* adjust spacing as needed */
+    flex-wrap: wrap; /* keeps them on one line, but wraps on small screens */
+}
 
-    .footer-links a {
-      text-decoration: none;
-      color: #666;
-      font-size: 16px;
-      transition: color 0.3s;
-    }
+.footer-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 1rem;
+}
 
-    .footer-links a:hover {
-      color: #6a0dad;
-    }
+.footer-links a:hover {
+    color: #a03ce7;
+}
 
     .footer-bottom {
       background-color: #000;
