@@ -101,6 +101,35 @@
       </div>
     </div>
   </footer>
+<script>
+function handleSubmit(event) {
+    event.preventDefault();
 
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    // Basic validation
+    if (name === "" || email === "" || phone === "" || message === "") {
+        alert("⚠️ Please fill out all fields before submitting.");
+        return;
+    }
+
+    // Email format check
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+        alert("⚠️ Please enter a valid email address.");
+        return;
+    }
+
+    // Success alert
+    alert(`✅ Message Sent Successfully!\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`);
+
+    // Simulate form submission (reset form)
+    document.getElementById("contactForm").reset();
+}
+</script>
 </body>
 </html>
+
