@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayNest | Pages</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f9f5ff;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 50px 0;
+    }
+
+    .page-title {
+      font-size: 36px;
+      margin-bottom: 40px;
+      color: #6a0dad;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .pages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .page-card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(106, 13, 173, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .page-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(106, 13, 173, 0.2);
+    }
+
+    .page-card-header {
+      background: linear-gradient(135deg, #6a0dad, #9b30ff);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    .page-card-header i {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #ffd700;
+    }
+
+    .page-card-header h3 {
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .page-card-body {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .page-card-body p {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #6a0dad;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #9b30ff;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #6a0dad, #9b30ff);
+      color: white;
+      padding: 50px 0 30px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin-bottom: 20px;
+      padding: 0 20px;
+    }
+
+    .footer-section h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .footer-section h3:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: #ffd700;
+      border-radius: 2px;
+    }
+
+    .footer-section p {
+      color: #f3eaff;
+      font-size: 15px;
+    }
+
+    .footer-section i {
+      color: #ffd700;
+      margin-right: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 14px;
+      color: #f5eaff;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .pages-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container main-content">
+    <h1 class="page-title">Pages Section</h1>
+    
+    <div class="pages-grid">
+      <div class="page-card">
+        <div class="page-card-header">
+          <i class="fas fa-user"></i>
+          <h3>About Us</h3>
+        </div>
+        <div class="page-card-body">
+          <p>Learn about our company, mission, values, and the team behind our success story.</p>
+          <a href="#" class="btn">Visit Page</a>
+        </div>
+      </div>
+      
+      <div class="page-card">
+        <div class="page-card-header">
+          <i class="fas fa-briefcase"></i>
+          <h3>Services</h3>
+        </div>
+        <div class="page-card-body">
+          <p>Discover the range of services we offer to meet your needs and exceed expectations.</p>
+          <a href="#" class="btn">Visit Page</a>
+        </div>
+      </div>
+      
+      <div class="page-card">
+        <div class="page-card-header">
+          <i class="fas fa-image"></i>
+          <h3>Portfolio</h3>
+        </div>
+        <div class="page-card-body">
+          <p>Explore our portfolio of successful projects and see the quality of our work.</p>
+          <a href="#" class="btn">Visit Page</a>
+        </div>
+      </div>
+      
+      <div class="page-card">
+        <div class="page-card-header">
+          <i class="fas fa-users"></i>
+          <h3>Our Team</h3>
+        </div>
+        <div class="page-card-body">
+          <p>Meet the talented professionals who make our company great.</p>
+          <a href="#" class="btn">Visit Page</a>
+        </div>
+      </div>
+      
+      <div class="page-card">
+        <div class="page-card-header">
+          <i class="fas fa-envelope"></i>
+          <h3>Contact Us</h3>
+        </div>
+        <div class="page-card-body">
+          <p>Get in touch with us. We'd love to hear from you and answer any questions.</p>
+          <a href="contactus.html" class="btn">Visit Page</a>
+        </div>
+      </div>
+      
+      <div class="page-card">
+        <div class="page-card-header">
+          <i class="fas fa-question-circle"></i>
+          <h3>FAQ</h3>
+        </div>
+        <div class="page-card-body">
+          <p>Find answers to frequently asked questions about our products and services.</p>
+          <a href="#" class="btn">Visit Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About StayNest</h3>
+          <p>At StayNest, we provide comfort and luxury for every traveler. Experience unforgettable stays with exceptional hospitality and premium services.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Contact Information</h3>
+          <p><i class="fas fa-envelope"></i> info@staynest.com</p>
+          <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2025 StayNest Hotel Management System. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
