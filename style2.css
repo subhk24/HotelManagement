@@ -661,23 +661,23 @@
       font-size: 16px;
     }
 
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      text-align: center;
-      background: #6a0dad;
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+/* Login Button */
+.btn-login {
+    background-color: #6a0dad; /* Purple background */
+    color: white;              /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
 
-    .btn:hover {
-      background: #8e4bbe;
-    }
+.btn-login:hover {
+    background-color: #8e4bbe; /* Darker purple on hover */
+}
+
 
     .success-box {
       background: #e6f9ed;
@@ -822,3 +822,4 @@
             opacity: 0.7;
             font-size: 0.9rem;
         }
+
