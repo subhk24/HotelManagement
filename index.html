@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="style2.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
   <div class="welcome-bar">
     <div class="welcome-text">Book your perfect stay today</div>
@@ -33,25 +32,37 @@
     </div>
   </header>
 
-  <div class="content">
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Book Unique Experiences</h1>
-        <p>Discover top rated hotels, shops and restaurants around the world</p>
-        <div class="search-bar">
-          <input type="text" placeholder="Hotel, City...">
-          <input type="date" placeholder="Select Booking Date">
-          <select>
-            <option>All Categories</option>
-            <option>Hotels</option>
-            <option>Restaurants</option>
-            <option>Shops</option>
-          </select>
-          <button>Search</button>
-        </div>
+  <  <section class="hero">
+    <div class="hero-content">
+      <h1>Book Unique Experiences</h1>
+      <p>Discover top rated hotels, shops and restaurants around the world</p>
+      <div class="search-bar">
+        <select id="searchPlace">
+          <option value="">Select City / Hotel</option>
+          <option value="Mumbai">Taj Mahal Palace, Mumbai</option>
+          <option value="Jaipur">Regenta Hotel, Jaipur</option>
+          <option value="Manali">Mountain View Retreat, Manali</option>
+          <option value="Goa">Beachside Resort, Goa</option>
+          <option value="Delhi">Hyatt Regency, Delhi</option>
+        </select>
+        <input type="date" id="searchDate" placeholder="Select Booking Date">
+        <select id="searchCategory">
+          <option>All Categories</option>
+          <option>Hotels</option>
+          <option>Restaurants</option>
+          <option>Shops</option>
+        </select>
+        <button id="searchBtn">Search</button>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+
+  <!-- Search Results -->
+  <section id="search-results">
+    <h2>Search Results</h2>
+    <div class="results-grid" id="resultsGrid"></div>
+  </section>
+
 
   <!-- Offers Section -->
   <section class="offers">
@@ -274,17 +285,99 @@
             </div>
         </div>
     </footer>
+<script>
+const hotels = [
+  {
+    name: "Taj Mahal Palace",
+    city: "Mumbai",
+    category: "Hotels",
+    img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Taj_Mahal_Palace_Hotel%2C_Mumbai%2C_India.jpg",
+    availableFrom: "2025-01-01",
+    availableTo: "2025-12-31",
+    desc: "Luxury heritage hotel with sea views."
+  },
+  {
+    name: "Regenta Hotel",
+    city: "Jaipur",
+    category: "Hotels",
+    img: "https://s7ap1.scene7.com/is/image/incredibleindia/hawa-mahal-jaipur-rajasthan-city-1-hero?qlt=82&ts=1742200253577",
+    availableFrom: "2025-02-01",
+    availableTo: "2025-12-31",
+    desc: "Elegant hotel near Hawa Mahal."
+  },
+  {
+    name: "Mountain View Retreat",
+    city: "Manali",
+    category: "Hotels",
+    img: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Manali_Himachal_Pradesh.jpg",
+    availableFrom: "2025-03-01",
+    availableTo: "2025-10-30",
+    desc: "Peaceful mountain stay with scenic views."
+  },
+  {
+    name: "Beachside Resort",
+    city: "Goa",
+    category: "Hotels",
+    img: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Palolem_Beach_Goa.jpg",
+    availableFrom: "2025-01-15",
+    availableTo: "2025-12-15",
+    desc: "Relaxing stay near the beach."
+  },
+  {
+    name: "Hyatt Regency",
+    city: "Delhi",
+    category: "Hotels",
+    img: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Hyatt_Regency_Delhi_Hotel.jpg",
+    availableFrom: "2025-04-01",
+    availableTo: "2025-12-31",
+    desc: "5-star hotel in central Delhi."
+  }
+];
+
+// ---------- SEARCH FUNCTION ----------
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const placeInput = document.getElementById('searchPlace').value.trim().toLowerCase();
+  const dateInput = document.getElementById('searchDate').value;
+  const categoryInput = document.getElementById('searchCategory').value;
+  const resultsGrid = document.getElementById('resultsGrid');
+  const resultsSection = document.getElementById('search-results');
+
+  resultsGrid.innerHTML = "";
+
+  if (!placeInput && !dateInput) {
+    alert("Please enter a place or select a date to search.");
+    return;
+  }
+
+  const filteredHotels = hotels.filter(hotel => {
+    const placeMatch = hotel.city.toLowerCase().includes(placeInput) || hotel.name.toLowerCase().includes(placeInput);
+    const categoryMatch = categoryInput === "All Categories" || hotel.category === categoryInput;
+    const dateMatch = !dateInput || (dateInput >= hotel.availableFrom && dateInput <= hotel.availableTo);
+    return placeMatch && categoryMatch && dateMatch;
+  });
+
+  if (filteredHotels.length === 0) {
+    resultsGrid.innerHTML = "<p style='text-align:center;width:100%;color:#666;'>No hotels found for your search.</p>";
+  } else {
+    filteredHotels.forEach(hotel => {
+      const card = document.createElement('div');
+      card.className = "result-card";
+      card.innerHTML = `
+        <img src="${hotel.img}" alt="${hotel.name}">
+        <div class="result-card-content">
+          <h3>${hotel.name}</h3>
+          <p><strong>City:</strong> ${hotel.city}</p>
+          <p>${hotel.desc}</p>
+        </div>
+      `;
+      resultsGrid.appendChild(card);
+    });
+  }
+
+  resultsSection.style.display = "block";
+  resultsSection.scrollIntoView({ behavior: 'smooth' });
+});
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
