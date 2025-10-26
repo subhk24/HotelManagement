@@ -49,13 +49,8 @@ h1 {
 }
 
 /* ===== Sections ===== */
-.section {
-  margin-bottom: 30px;
-}
-h3 {
-  color: #6a0dad;
-  margin-bottom: 15px;
-}
+.section { margin-bottom: 30px; }
+h3 { color: #6a0dad; margin-bottom: 15px; }
 .table-container {
   background: #fff;
   border-radius: 15px;
@@ -68,6 +63,7 @@ h3 {
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
   margin-top: 10px;
 }
 th, td {
@@ -76,13 +72,45 @@ th, td {
   border-bottom: 1px solid #eee;
   vertical-align: middle;
 }
+th:first-child, td:first-child {
+  width: 260px;
+  max-width: 260px;
+  word-wrap: break-word;
+}
 th {
   background: #6a0dad;
   color: #fff;
 }
-tr:hover {
-  background: #f2e8ff;
+tr:hover { background: #f2e8ff; }
+
+/* ===== Hotel Cell Layout ===== */
+.hotel-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
 }
+.img-wrap {
+  width: 96px;
+  height: 72px;
+  flex: 0 0 96px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hotel-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.hotel-info strong { font-size: 15px; }
+.hotel-info small { color: #666; font-size: 13px; margin-top: 4px; }
 
 /* ===== Buttons ===== */
 button {
@@ -120,30 +148,18 @@ button {
 }
 .search-container input:focus {
   border-color: #9b30ff;
-  box-shadow: 0 0 5px rgba(155, 48, 255, 0.3);
+  box-shadow: 0 0 5px rgba(155,48,255,0.3);
 }
 .search-container button {
   padding: 9px 18px;
   font-weight: 500;
 }
 
-/* ===== Hotel Image Styling ===== */
-.hotel-img {
-  width: 90px;
-  height: 70px;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-bottom: 5px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-td img {
-  display: block;
-  margin: 0 auto 5px;
-}
-td small {
-  color: #777;
-  display: block;
-  font-size: 13px;
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hotel-cell { flex-direction: column; align-items: center; }
+  .hotel-info { align-items: center; text-align: center; }
+  th:first-child, td:first-child { width: auto; }
 }
 </style>
 </head>
@@ -208,6 +224,7 @@ td small {
 </div>
 
 <script>
+// ===== Data =====
 let bookings = [
   {id:2, hotel:'Hotel Willow Banks', location:'Manali', img:'https://tse3.mm.bing.net/th/id/OIP.J8rZYXFyA4zXNJ91yA9CWQHaEK?pid=ImgDetMain', checkIn:'2025-10-20', checkOut:'2025-10-25', guests:3, rooms:2, price:8000},
   {id:1, hotel:'Regenta Hotel', location:'Jaipur', img:'https://cf.bstatic.com/xdata/images/hotel/max1024x768/123456.jpg', checkIn:'2025-09-10', checkOut:'2025-09-12', guests:2, rooms:1, price:5000},
@@ -219,11 +236,13 @@ let savedHotels = [
   {id:2, hotel:'ITC Grand', location:'Delhi', price:9000, img:'https://cf.bstatic.com/xdata/images/hotel/max1024x768/192837.jpg'}
 ];
 
+// ===== Counts =====
 function renderCounts() {
   document.getElementById('bookingCount').textContent = bookings.length;
   document.getElementById('savedCount').textContent = savedHotels.length;
 }
 
+// ===== Render Bookings =====
 function renderBookings() {
   const tbody = document.querySelector('#bookingTable tbody');
   tbody.innerHTML = '';
@@ -236,9 +255,13 @@ function renderBookings() {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>
-          <img src="${b.img}" alt="${b.hotel}" class="hotel-img">
-          <strong>${b.hotel}</strong>
-          <small>${b.location}</small>
+          <div class="hotel-cell">
+            <div class="img-wrap"><img src="${b.img}" alt="${b.hotel}"></div>
+            <div class="hotel-info">
+              <strong>${b.hotel}</strong>
+              <small>${b.location}</small>
+            </div>
+          </div>
         </td>
         <td>${b.checkIn}</td>
         <td>${b.checkOut}</td>
@@ -254,6 +277,7 @@ function renderBookings() {
     });
 }
 
+// ===== Delete Booking =====
 function deleteBooking(id) {
   if(confirm('Are you sure you want to cancel this booking?')) {
     bookings = bookings.filter(b => b.id !== id);
@@ -262,6 +286,7 @@ function deleteBooking(id) {
   }
 }
 
+// ===== Render Saved Hotels =====
 function renderSaved() {
   const tbody = document.querySelector('#savedTable tbody');
   tbody.innerHTML = '';
@@ -272,8 +297,12 @@ function renderSaved() {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>
-          <img src="${h.img}" alt="${h.hotel}" class="hotel-img">
-          <strong>${h.hotel}</strong>
+          <div class="hotel-cell">
+            <div class="img-wrap"><img src="${h.img}" alt="${h.hotel}"></div>
+            <div class="hotel-info">
+              <strong>${h.hotel}</strong>
+            </div>
+          </div>
         </td>
         <td>${h.location}</td>
         <td>₹${h.price.toLocaleString()}</td>
@@ -282,6 +311,7 @@ function renderSaved() {
     });
 }
 
+// ===== Delete Saved =====
 function deleteSaved(id) {
   if(confirm('Remove this hotel from saved list?')) {
     savedHotels = savedHotels.filter(h => h.id !== id);
@@ -290,11 +320,12 @@ function deleteSaved(id) {
   }
 }
 
-// Redirect to index.html instead of prompts
+// ===== Redirect to Index =====
 function goToIndex() {
   window.location.href = 'index.html';
 }
 
+// ===== Listeners =====
 document.getElementById('searchBooking').addEventListener('input', renderBookings);
 document.getElementById('searchSaved').addEventListener('input', renderSaved);
 
