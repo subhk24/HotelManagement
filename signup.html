@@ -38,7 +38,7 @@
         color: #333;
     }
 
-    input, select {
+    input {
         width: 100%;
         padding: 10px;
         border: 1.5px solid #6a0dad;
@@ -48,7 +48,7 @@
         transition: 0.3s;
     }
 
-    input:focus, select:focus {
+    input:focus {
         border-color: #9b30ff;
         box-shadow: 0 0 6px rgba(155, 48, 255, 0.4);
     }
@@ -100,13 +100,8 @@
         <label>Full Name</label>
         <input type="text" id="fullName" placeholder="Enter full name" required>
 
-        <label>Role</label>
-        <select id="role" required>
-            <option value="">Select Role</option>
-            <option value="Admin">Admin</option>
-            <option value="Employee">Employee</option>
-            <option value="Customer">Customer</option>
-        </select>
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Choose a username" required>
 
         <label>Email</label>
         <input type="email" id="email" placeholder="Enter email" required>
@@ -124,7 +119,7 @@
     </form>
 
     <div class="login-link">
-        Already have an account? <a href="login.html">Login here</a>
+        Already have an account? <a href="login-selection.html">Login here</a>
     </div>
 </div>
 
@@ -133,30 +128,22 @@ function registerUser(event) {
     event.preventDefault();
 
     const name = document.getElementById("fullName").value.trim();
-    const role = document.getElementById("role").value.trim();
+    const username = document.getElementById("username").value.trim();
     const email = document.getElementById("email").value.trim();
     const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    if (!role) {
-        alert("⚠️ Please select a valid role!");
+    if (username.length < 4) {
+        alert("⚠️ Username must be at least 4 characters long!");
         return;
     }
 
-    // Show registration success alert
-    alert(`${role} Registered Successfully! 🎉\n\nDetails:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`);
+    alert(`Registration Successful! 🎉\n\nDetails:\nName: ${name}\nUsername: ${username}\nEmail: ${email}\nPhone: ${phone}`);
 
-    // Redirect based on role
-    if (role === "Admin") {
-        window.location.href = "admin-login.html";
-    } else if (role === "Employee") {
-        window.location.href = "employee-login.html";
-    } else if (role === "Customer") {
-        window.location.href = "customer-login.html";
-    }
+    window.location.href = "login.html";
 }
 </script>
 
 </body>
 </html>
-
-
