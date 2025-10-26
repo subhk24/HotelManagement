@@ -6,326 +6,433 @@
 <title>My Hotel Dashboard | StayNest</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-body {
-  background: #f7f5fc;
-  color: #333;
-  padding: 20px;
-  min-height: 100vh;
-}
-h1 {
-  color: #6a0dad;
-  text-align: center;
-  margin-bottom: 30px;
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+body {background:#f7f5fc; color:#333; min-height:100vh; display:flex; flex-direction:column;}
+    /* Reset & Basic */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    /* Top Bar */
+    .top-bar {
+        background-color: #000;
+        color: white;
+        padding: 8px 0;
+        font-size: 0.9rem;
+    }
+
+    .top-bar-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    /* Header Navigation */
+    header {
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .logo span {
+        color: #a03ce7;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+    nav ul li {
+        margin-left: 25px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #000;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: #a03ce7;
+    }
+
+    /* Auth Buttons */
+    .auth-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .btn-login {
+        background-color: transparent;
+        color: #000;
+        border: 1px solid #000;
+    }
+
+    .btn-signup {
+        background-color: #a03ce7;
+        color: white;
+        border: 1px solid #a03ce7;
+    }
+
+.btn-login {
+    background-color: #a03ce7;  /* purple background */
+    color: #fff;                 /* white text */
+    border: 1px solid #a03ce7;
 }
 
-/* ===== Cards ===== */
-.cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 30px;
-}
-.card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  width: 250px;
-  text-align: center;
-  transition: 0.3s;
-}
-.card:hover { transform: translateY(-5px); }
-.card i {
-  font-size: 35px;
-  color: #6a0dad;
-  margin-bottom: 10px;
+.btn-login:hover {
+    background-color: #8a2fc9;   /* darker purple on hover */
 }
 
-/* ===== Sections ===== */
-.section { margin-bottom: 30px; }
-h3 { color: #6a0dad; margin-bottom: 15px; }
-.table-container {
-  background: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  overflow-x: auto;
+
+    .btn-signup:hover {
+        background-color: #8a2fc9;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nav-container {
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        nav ul {
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 5px 10px;
+        }
+
+        .auth-buttons {
+            margin-top: 15px;
+        }
+    }
+
+.navbar {
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
 }
 
-/* ===== Table ===== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  margin-top: 10px;
-}
-th, td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  vertical-align: middle;
-}
-th:first-child, td:first-child {
-  width: 260px;
-  max-width: 260px;
-  word-wrap: break-word;
-}
-th {
-  background: #6a0dad;
-  color: #fff;
-}
-tr:hover { background: #f2e8ff; }
-
-/* ===== Hotel Cell Layout ===== */
-.hotel-cell {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  justify-content: flex-start;
-}
-.img-wrap {
-  width: 96px;
-  height: 72px;
-  flex: 0 0 96px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.hotel-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.hotel-info strong { font-size: 15px; }
-.hotel-info small { color: #666; font-size: 13px; margin-top: 4px; }
-
-/* ===== Buttons ===== */
-button {
-  padding: 7px 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 14px;
-}
-.delete-btn { background: #dc2626; color: #fff; }
-.delete-btn:hover { background: #ff4c4c; }
-.view-btn { background: #6a0dad; color: #fff; }
-.view-btn:hover { background: #9b30ff; }
-.add-btn { background: #6a0dad; color: #fff; }
-.add-btn:hover { background: #9b30ff; }
-
-/* ===== Search Bar ===== */
-.search-container {
-  margin-bottom: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-.search-container input {
-  flex: 1;
-  min-width: 220px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 2px solid #6a0dad;
-  outline: none;
-  font-size: 15px;
-  transition: 0.3s;
-}
-.search-container input:focus {
-  border-color: #9b30ff;
-  box-shadow: 0 0 5px rgba(155,48,255,0.3);
-}
-.search-container button {
-  padding: 9px 18px;
-  font-weight: 500;
+.navbar a {
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  .hotel-cell { flex-direction: column; align-items: center; }
-  .hotel-info { align-items: center; text-align: center; }
-  th:first-child, td:first-child { width: auto; }
+.navbar a:hover {
+  text-decoration:underline;
 }
+
+main {flex:1; padding:20px;}
+
+h1 {color:#6a0dad; text-align:center; margin-bottom:30px;}
+.cards {display:flex; justify-content:center; gap:30px; flex-wrap:wrap; margin-bottom:30px;}
+.card {background:#fff; border-radius:15px; padding:25px; box-shadow:0 5px 15px rgba(0,0,0,0.1); width:250px; text-align:center; transition:0.3s;}
+.card:hover {transform:translateY(-5px);}
+.card i {font-size:35px; color:#6a0dad; margin-bottom:10px;}
+
+.section {margin-bottom:30px;}
+h3 {color:#6a0dad; margin-bottom:15px;}
+.table-container {background:#fff; border-radius:15px; padding:20px; box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+table {width:100%; border-collapse:collapse; margin-top:10px;}
+th, td {padding:12px; text-align:center; border-bottom:1px solid #eee; vertical-align:middle;}
+th {background:#6a0dad; color:#fff;}
+tr:hover {background:#f2e8ff;}
+
+.hotel-cell {display:flex; align-items:center; gap:12px; text-align:left;}
+.hotel-img {width:80px; height:60px; border-radius:8px; object-fit:cover;}
+
+button {padding:8px 14px; border:none; border-radius:6px; cursor:pointer; transition:0.3s; font-size:14px;}
+.delete-btn {background:#dc2626; color:#fff;}
+.delete-btn:hover {background:#ff4c4c;}
+.view-btn {background:#6a0dad; color:#fff;}
+.view-btn:hover {background:#9b30ff;}
+.add-btn {background:#6a0dad; color:#fff;}
+.add-btn:hover {background:#9b30ff;}
+
+.search-container {margin-bottom:15px; display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between;}
+.search-container input {flex:1; padding:10px 14px; border-radius:8px; border:1.5px solid #6a0dad; outline:none; font-size:14px; transition:0.3s;}
+.search-container input:focus {border-color:#9b30ff; box-shadow:0 0 4px rgba(155,48,255,0.4);}
+.actions {display:flex; justify-content:center; gap:8px;}
+
+/* === FOOTER === */
+footer {
+    background-color: #000;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.footer-logo span {
+    color: #a03ce7;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #a03ce7;
+}
+
+copyright {
+    margin-top: 20px;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
 </style>
 </head>
 <body>
-
-<h1>🏨 My StayNest Dashboard</h1>
-
-<div class="cards">
-  <div class="card">
-    <i class="fas fa-bed"></i>
-    <h3 id="bookingCount">0</h3>
-    <p>Total Bookings</p>
-  </div>
-  <div class="card">
-    <i class="fas fa-heart"></i>
-    <h3 id="savedCount">0</h3>
-    <p>Saved Hotels</p>
-  </div>
+ <div class="top-bar">
+    <div class="top-bar-content">
+        <div>Welcome to StayNest - Book your perfect stay today!</div>
+        <div>Contact: support@staynest.com</div>
+    </div>
 </div>
+<header>
+    <div class="nav-container">
+        <div class="logo">Stay<span>Nest</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Hotels</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#">Cart</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-login">Login</a>
+            <a href="#" class="btn btn-signup">Sign Up</a>
+        </div>
+    </div>
+</header>
 
-<!-- BOOKINGS SECTION -->
-<div class="section table-container">
-  <h3>My Bookings</h3>
-  <div class="search-container">
-    <input type="text" id="searchBooking" placeholder="🔍 Search bookings by hotel name or location">
+<!-- MAIN DASHBOARD -->
+
+<main>
+  <h1>🏨 My StayNest Dashboard</h1>
+  <div class="cards">
+    <div class="card">
+      <i class="fas fa-bed"></i>
+      <h3 id="bookingCount">0</h3>
+      <p>Total Bookings</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-heart"></i>
+      <h3 id="savedCount">0</h3>
+      <p>Saved Hotels</p>
+    </div>
   </div>
-  <table id="bookingTable">
-    <thead>
-      <tr>
-        <th>Hotel</th>
-        <th>Check-In</th>
-        <th>Check-Out</th>
-        <th>Guests</th>
-        <th>Rooms</th>
-        <th>Price / Night</th>
-        <th>Total Price</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
 
-<!-- SAVED HOTELS SECTION -->
-<div class="section table-container">
-  <h3>Saved Hotels</h3>
-  <div class="search-container">
-    <input type="text" id="searchSaved" placeholder="🔍 Search saved hotels">
-    <button class="add-btn" onclick="goToIndex()">+ Add Hotel</button>
+  <div class="section table-container">
+    <h3>My Bookings</h3>
+    <div class="search-container">
+      <input type="text" id="searchBooking" placeholder="Search bookings by hotel name or location">
+    </div>
+    <table id="bookingTable">
+      <thead>
+        <tr>
+          <th>Hotel</th>
+          <th>Check-In</th>
+          <th>Check-Out</th>
+          <th>Guests</th>
+          <th>Rooms</th>
+          <th>Price / Night</th>
+          <th>Total Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
-  <table id="savedTable">
-    <thead>
-      <tr>
-        <th>Hotel</th>
-        <th>Location</th>
-        <th>Price / Night</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
 
+  <div class="section table-container">
+    <h3>Saved Hotels</h3>
+    <div class="search-container">
+      <input type="text" id="searchSaved" placeholder="Search saved hotels">
+      <button class="add-btn" onclick="window.location.href='index.html'">+ Add Hotel</button>
+    </div>
+    <table id="savedTable">
+      <thead>
+        <tr>
+          <th>Hotel</th>
+          <th>Location</th>
+          <th>Price / Night</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">Stay<span>Nest</span></div>
+        <h2 style="margin-bottom: 15px; color: #a03ce7;">About Us</h2>
+        <div class="footer-links">
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">FAQ</a>
+        </div>
+        <div class="copyright">
+            © 2025 StayNest. All rights reserved. | Book your perfect stay with us
+        </div>
+    </div>
+</footer>
+
+
+<!-- JAVASCRIPT -->
 <script>
-// ===== Data =====
 let bookings = [
-  {id:2, hotel:'Hotel Willow Banks', location:'Manali', img:'https://tse3.mm.bing.net/th/id/OIP.J8rZYXFyA4zXNJ91yA9CWQHaEK?pid=ImgDetMain', checkIn:'2025-10-20', checkOut:'2025-10-25', guests:3, rooms:2, price:8000},
-  {id:1, hotel:'Regenta Hotel', location:'Jaipur', img:'https://cf.bstatic.com/xdata/images/hotel/max1024x768/123456.jpg', checkIn:'2025-09-10', checkOut:'2025-09-12', guests:2, rooms:1, price:5000},
-  {id:3, hotel:'Leela Hotel', location:'Bengaluru', img:'https://cf.bstatic.com/xdata/images/hotel/max1024x768/654321.jpg', checkIn:'2025-11-15', checkOut:'2025-11-18', guests:1, rooms:1, price:6000}
+  {id:2, hotel:'Hotel Willow Banks', location:'Manali', img:'https://tse3.mm.bing.net/th/id/OIP.J8rZYXFyA4zXNJ91yA9CWQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3', checkIn:'2025-10-20', checkOut:'2025-10-25', guests:3, rooms:2, price:8000},
+  {id:1, hotel:'Regenta Hotel', location:'Jaipur', img:'image2.jpg', checkIn:'2025-09-10', checkOut:'2025-09-12', guests:2, rooms:1, price:5000},
+  {id:3, hotel:'Leela Hotel', location:'Bengaluru', img:'image3.jpg', checkIn:'2025-11-15', checkOut:'2025-11-18', guests:1, rooms:1, price:6000}
 ];
 
 let savedHotels = [
-  {id:1, hotel:'JW Marriott', location:'Mumbai', price:12000, img:'https://cf.bstatic.com/xdata/images/hotel/max1024x768/987654.jpg'},
-  {id:2, hotel:'ITC Grand', location:'Delhi', price:9000, img:'https://cf.bstatic.com/xdata/images/hotel/max1024x768/192837.jpg'}
+  {id:1, hotel:'JW Marriott', location:'Mumbai', price:12000, img:'image4.jpg'},
+  {id:2, hotel:'ITC Grand', location:'Delhi', price:9000, img:'image6.jpg'}
 ];
 
-// ===== Counts =====
 function renderCounts() {
   document.getElementById('bookingCount').textContent = bookings.length;
   document.getElementById('savedCount').textContent = savedHotels.length;
 }
 
-// ===== Render Bookings =====
 function renderBookings() {
   const tbody = document.querySelector('#bookingTable tbody');
   tbody.innerHTML = '';
   const search = document.getElementById('searchBooking').value.toLowerCase();
-
   bookings.filter(b => b.hotel.toLowerCase().includes(search) || b.location.toLowerCase().includes(search))
     .forEach(b => {
-      const nights = (new Date(b.checkOut) - new Date(b.checkIn)) / (1000*60*60*24);
+      const nights = (new Date(b.checkOut) - new Date(b.checkIn)) / (1000 * 60 * 60 * 24);
       const totalPrice = b.price * nights * b.rooms;
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>
-          <div class="hotel-cell">
-            <div class="img-wrap"><img src="${b.img}" alt="${b.hotel}"></div>
-            <div class="hotel-info">
-              <strong>${b.hotel}</strong>
-              <small>${b.location}</small>
-            </div>
-          </div>
+        <td class="hotel-cell">
+          <img src="${b.img}" alt="hotel" class="hotel-img">
+          <div><strong>${b.hotel}</strong><br><small>${b.location}</small></div>
         </td>
         <td>${b.checkIn}</td>
         <td>${b.checkOut}</td>
         <td>${b.guests}</td>
         <td>${b.rooms}</td>
-        <td>₹${b.price.toLocaleString()}</td>
-        <td>₹${totalPrice.toLocaleString()}</td>
+        <td>₹${b.price}</td>
+        <td>₹${totalPrice}</td>
         <td>
-          <button class="view-btn">View</button>
-          <button class="delete-btn" onclick="deleteBooking(${b.id})">Cancel</button>
+          <div class="actions">
+            <button class="view-btn">View</button>
+            <button class="delete-btn" onclick="deleteBooking(${b.id})">Cancel</button>
+          </div>
         </td>`;
       tbody.appendChild(tr);
-    });
+  });
 }
 
-// ===== Delete Booking =====
 function deleteBooking(id) {
-  if(confirm('Are you sure you want to cancel this booking?')) {
+  if (confirm('Are you sure you want to cancel this booking?')) {
     bookings = bookings.filter(b => b.id !== id);
     renderCounts();
     renderBookings();
   }
 }
 
-// ===== Render Saved Hotels =====
 function renderSaved() {
   const tbody = document.querySelector('#savedTable tbody');
   tbody.innerHTML = '';
   const search = document.getElementById('searchSaved').value.toLowerCase();
-
   savedHotels.filter(h => h.hotel.toLowerCase().includes(search) || h.location.toLowerCase().includes(search))
     .forEach(h => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>
-          <div class="hotel-cell">
-            <div class="img-wrap"><img src="${h.img}" alt="${h.hotel}"></div>
-            <div class="hotel-info">
-              <strong>${h.hotel}</strong>
-            </div>
-          </div>
+        <td class="hotel-cell">
+          <img src="${h.img}" alt="hotel" class="hotel-img">
+          <div><strong>${h.hotel}</strong></div>
         </td>
         <td>${h.location}</td>
-        <td>₹${h.price.toLocaleString()}</td>
+        <td>₹${h.price}</td>
         <td><button class="delete-btn" onclick="deleteSaved(${h.id})">Remove</button></td>`;
       tbody.appendChild(tr);
-    });
+  });
 }
 
-// ===== Delete Saved =====
 function deleteSaved(id) {
-  if(confirm('Remove this hotel from saved list?')) {
+  if (confirm('Remove this hotel from saved list?')) {
     savedHotels = savedHotels.filter(h => h.id !== id);
     renderCounts();
     renderSaved();
   }
 }
 
-// ===== Redirect to Index =====
-function goToIndex() {
-  window.location.href = 'index.html';
-}
-
-// ===== Listeners =====
 document.getElementById('searchBooking').addEventListener('input', renderBookings);
 document.getElementById('searchSaved').addEventListener('input', renderSaved);
 
@@ -333,8 +440,7 @@ window.onload = () => {
   renderCounts();
   renderBookings();
   renderSaved();
-}
+};
 </script>
-
 </body>
 </html>
