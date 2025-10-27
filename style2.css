@@ -736,6 +736,76 @@
       text-align: center;
     }
 
+    /* Welcome Modal Styles */
+    .welcome-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+    }
+
+    .welcome-modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 450px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .welcome-modal-content h2 {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    .welcome-modal-content p {
+      color: #666;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+
+    .welcome-modal-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .welcome-modal-buttons button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .welcome-modal-buttons .signup-btn {
+      background: #6a0dad;
+      color: white;
+    }
+
+    .welcome-modal-buttons .signup-btn:hover {
+      background: #8e4bbe;
+    }
+
+    .welcome-modal-buttons .login-btn {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .welcome-modal-buttons .login-btn:hover {
+      background: #e0e0e0;
+    }
+
     /* Responsive Design */
     @media (max-width: 1024px) {
       .welcome-bar, header {
@@ -800,6 +870,10 @@
         gap: 20px;
         text-align: center;
       }
+      
+      .welcome-modal-buttons {
+        flex-direction: column;
+      }
     }
 
     @media (max-width: 480px) {
@@ -822,6 +896,10 @@
       .container {
         width: 90%;
         padding: 20px;
+      }
+      
+      .welcome-modal-content {
+        padding: 25px;
       }
     }
 
@@ -869,5 +947,3 @@
             opacity: 0.7;
             font-size: 0.9rem;
         }
-
-
