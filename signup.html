@@ -465,217 +465,223 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Form elements
-            const registerForm = document.getElementById('registerForm');
-            const fullNameInput = document.getElementById('fullName');
-            const usernameInput = document.getElementById('username');
-            const emailInput = document.getElementById('email');
-            const phoneInput = document.getElementById('phone');
-            const addressInput = document.getElementById('address');
-            const passwordInput = document.getElementById('password');
-            const confirmPasswordInput = document.getElementById('confirmPassword');
-            const registerButton = document.getElementById('registerButton');
-            const successMessage = document.getElementById('successMessage');
-            
-            // Error elements
-            const fullNameError = document.getElementById('fullNameError');
-            const usernameError = document.getElementById('usernameError');
-            const emailError = document.getElementById('emailError');
-            const phoneError = document.getElementById('phoneError');
-            const addressError = document.getElementById('addressError');
-            const passwordError = document.getElementById('passwordError');
-            const confirmPasswordError = document.getElementById('confirmPasswordError');
-            
-            // Password requirement elements
-            const reqLength = document.getElementById('req-length');
-            const reqUppercase = document.getElementById('req-uppercase');
-            const reqLowercase = document.getElementById('req-lowercase');
-            const reqNumber = document.getElementById('req-number');
-            const reqSpecial = document.getElementById('req-special');
-            
-            // Toggle password visibility
-            const togglePassword = document.getElementById('togglePassword');
-            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
-            
-            togglePassword.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.classList.toggle('fa-eye');
-                this.classList.toggle('fa-eye-slash');
-            });
-            
-            toggleConfirmPassword.addEventListener('click', function() {
-                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                confirmPasswordInput.setAttribute('type', type);
-                this.classList.toggle('fa-eye');
-                this.classList.toggle('fa-eye-slash');
-            });
-            
-            // Real-time password validation
-            passwordInput.addEventListener('input', function() {
-                validatePassword();
-                validateConfirmPassword();
-            });
-            
-            confirmPasswordInput.addEventListener('input', validateConfirmPassword);
-            
-            // Form validation on submit
-            registerForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const isFullNameValid = validateFullName();
-                const isUsernameValid = validateUsername();
-                const isEmailValid = validateEmail();
-                const isPhoneValid = validatePhone();
-                const isAddressValid = validateAddress();
-                const isPasswordValid = validatePassword();
-                const isConfirmPasswordValid = validateConfirmPassword();
-                
-                if (isFullNameValid && isUsernameValid && isEmailValid && 
-                    isPhoneValid && isAddressValid && isPasswordValid && isConfirmPasswordValid) {
-                    
-                    // In a real application, you would send the data to a server here
-                    // For this example, we'll just show a success message
-                    
-                    // Show success message
-                    successMessage.style.display = 'block';
-                    
-                    // Disable the form
-                    registerButton.disabled = true;
-                    
-                    // Show alert and redirect to index.html after user clicks OK
-                    setTimeout(function() {
-                        alert('Registration successful! Click OK to go to the home page.');
-                        window.location.href = 'index.html';
-                    }, 100);
-                }
-            });
-            
-            // Validation functions
-            function validateFullName() {
-                const value = fullNameInput.value.trim();
-                if (value === '') {
-                    showError(fullNameInput, fullNameError);
-                    return false;
-                } else {
-                    hideError(fullNameInput, fullNameError);
-                    return true;
-                }
-            }
-            
-            function validateUsername() {
-                const value = usernameInput.value.trim();
-                if (value === '' || value.length < 3 || value.length > 20) {
-                    showError(usernameInput, usernameError);
-                    return false;
-                } else {
-                    hideError(usernameInput, usernameError);
-                    return true;
-                }
-            }
-            
-            function validateEmail() {
-                const value = emailInput.value.trim();
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (value === '' || !emailRegex.test(value)) {
-                    showError(emailInput, emailError);
-                    return false;
-                } else {
-                    hideError(emailInput, emailError);
-                    return true;
-                }
-            }
-            
-            function validatePhone() {
-                const value = phoneInput.value.trim();
-                const phoneRegex = /^\d{10}$/;
-                if (value === '' || !phoneRegex.test(value)) {
-                    showError(phoneInput, phoneError);
-                    return false;
-                } else {
-                    hideError(phoneInput, phoneError);
-                    return true;
-                }
-            }
-            
-            function validateAddress() {
-                const value = addressInput.value.trim();
-                if (value === '') {
-                    showError(addressInput, addressError);
-                    return false;
-                } else {
-                    hideError(addressInput, addressError);
-                    return true;
-                }
-            }
-            
-            function validatePassword() {
-                const value = passwordInput.value;
-                
-                // Check length
-                const hasLength = value.length >= 8;
-                reqLength.className = hasLength ? 'requirement-met' : 'requirement-not-met';
-                
-                // Check uppercase
-                const hasUppercase = /[A-Z]/.test(value);
-                reqUppercase.className = hasUppercase ? 'requirement-met' : 'requirement-not-met';
-                
-                // Check lowercase
-                const hasLowercase = /[a-z]/.test(value);
-                reqLowercase.className = hasLowercase ? 'requirement-met' : 'requirement-not-met';
-                
-                // Check number
-                const hasNumber = /[0-9]/.test(value);
-                reqNumber.className = hasNumber ? 'requirement-met' : 'requirement-not-met';
-                
-                // Check special character
-                const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
-                reqSpecial.className = hasSpecial ? 'requirement-met' : 'requirement-not-met';
-                
-                const isValid = hasLength && hasUppercase && hasLowercase && hasNumber && hasSpecial;
-                
-                if (!isValid && value !== '') {
-                    showError(passwordInput, passwordError);
-                    return false;
-                } else {
-                    hideError(passwordInput, passwordError);
-                    return isValid;
-                }
-            }
-            
-            function validateConfirmPassword() {
-                const value = confirmPasswordInput.value;
-                const passwordValue = passwordInput.value;
-                
-                if (value !== passwordValue) {
-                    showError(confirmPasswordInput, confirmPasswordError);
-                    return false;
-                } else {
-                    hideError(confirmPasswordInput, confirmPasswordError);
-                    return true;
-                }
-            }
-            
-            // Helper functions for showing/hiding errors
-            function showError(input, errorElement) {
-                input.style.borderColor = '#dc3545';
-                errorElement.style.display = 'block';
-            }
-            
-            function hideError(input, errorElement) {
-                input.style.borderColor = '#ddd';
-                errorElement.style.display = 'none';
-            }
-            
-            // Real-time validation as user types
-            fullNameInput.addEventListener('blur', validateFullName);
-            usernameInput.addEventListener('blur', validateUsername);
-            emailInput.addEventListener('blur', validateEmail);
-            phoneInput.addEventListener('blur', validatePhone);
-            addressInput.addEventListener('blur', validateAddress);
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form elements
+        const registerForm = document.getElementById('registerForm');
+        const fullNameInput = document.getElementById('fullName');
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const addressInput = document.getElementById('address');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const registerButton = document.getElementById('registerButton');
+        const successMessage = document.getElementById('successMessage');
+        
+        // Error elements
+        const fullNameError = document.getElementById('fullNameError');
+        const usernameError = document.getElementById('usernameError');
+        const emailError = document.getElementById('emailError');
+        const phoneError = document.getElementById('phoneError');
+        const addressError = document.getElementById('addressError');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        
+        // Password requirement elements
+        const reqLength = document.getElementById('req-length');
+        const reqUppercase = document.getElementById('req-uppercase');
+        const reqLowercase = document.getElementById('req-lowercase');
+        const reqNumber = document.getElementById('req-number');
+        const reqSpecial = document.getElementById('req-special');
+        
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
         });
-    </script>
+        
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+        
+        // Real-time password validation
+        passwordInput.addEventListener('input', function() {
+            validatePassword();
+            validateConfirmPassword();
+        });
+        
+        confirmPasswordInput.addEventListener('input', validateConfirmPassword);
+        
+        // Form validation on submit
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const isFullNameValid = validateFullName();
+            const isUsernameValid = validateUsername();
+            const isEmailValid = validateEmail();
+            const isPhoneValid = validatePhone();
+            const isAddressValid = validateAddress();
+            const isPasswordValid = validatePassword();
+            const isConfirmPasswordValid = validateConfirmPassword();
+            
+            if (isFullNameValid && isUsernameValid && isEmailValid && 
+                isPhoneValid && isAddressValid && isPasswordValid && isConfirmPasswordValid) {
+                
+                // In a real application, you would send the data to a server here
+                // For this example, we'll just show a success message
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                
+                // Disable the form
+                registerButton.disabled = true;
+                
+                // MARK USER AS LOGGED IN AND PREVENT POPUP FROM SHOWING AGAIN
+                localStorage.setItem('userLoggedIn', 'true');
+                localStorage.setItem('hasSeenWelcomeModal', 'true');
+                
+                // Show alert and redirect to index.html after user clicks OK
+                setTimeout(function() {
+                    alert('Registration successful! Click OK to go to the home page.');
+                    // Redirect with parameter to prevent popup
+                    window.location.href = 'index.html?fromSignup=true';
+                }, 100);
+            }
+        });
+        
+        // Validation functions
+        function validateFullName() {
+            const value = fullNameInput.value.trim();
+            if (value === '') {
+                showError(fullNameInput, fullNameError);
+                return false;
+            } else {
+                hideError(fullNameInput, fullNameError);
+                return true;
+            }
+        }
+        
+        function validateUsername() {
+            const value = usernameInput.value.trim();
+            if (value === '' || value.length < 3 || value.length > 20) {
+                showError(usernameInput, usernameError);
+                return false;
+            } else {
+                hideError(usernameInput, usernameError);
+                return true;
+            }
+        }
+        
+        function validateEmail() {
+            const value = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (value === '' || !emailRegex.test(value)) {
+                showError(emailInput, emailError);
+                return false;
+            } else {
+                hideError(emailInput, emailError);
+                return true;
+            }
+        }
+        
+        function validatePhone() {
+            const value = phoneInput.value.trim();
+            const phoneRegex = /^\d{10}$/;
+            if (value === '' || !phoneRegex.test(value)) {
+                showError(phoneInput, phoneError);
+                return false;
+            } else {
+                hideError(phoneInput, phoneError);
+                return true;
+            }
+        }
+        
+        function validateAddress() {
+            const value = addressInput.value.trim();
+            if (value === '') {
+                showError(addressInput, addressError);
+                return false;
+            } else {
+                hideError(addressInput, addressError);
+                return true;
+            }
+        }
+        
+        function validatePassword() {
+            const value = passwordInput.value;
+            
+            // Check length
+            const hasLength = value.length >= 8;
+            reqLength.className = hasLength ? 'requirement-met' : 'requirement-not-met';
+            
+            // Check uppercase
+            const hasUppercase = /[A-Z]/.test(value);
+            reqUppercase.className = hasUppercase ? 'requirement-met' : 'requirement-not-met';
+            
+            // Check lowercase
+            const hasLowercase = /[a-z]/.test(value);
+            reqLowercase.className = hasLowercase ? 'requirement-met' : 'requirement-not-met';
+            
+            // Check number
+            const hasNumber = /[0-9]/.test(value);
+            reqNumber.className = hasNumber ? 'requirement-met' : 'requirement-not-met';
+            
+            // Check special character
+            const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value);
+            reqSpecial.className = hasSpecial ? 'requirement-met' : 'requirement-not-met';
+            
+            const isValid = hasLength && hasUppercase && hasLowercase && hasNumber && hasSpecial;
+            
+            if (!isValid && value !== '') {
+                showError(passwordInput, passwordError);
+                return false;
+            } else {
+                hideError(passwordInput, passwordError);
+                return isValid;
+            }
+        }
+        
+        function validateConfirmPassword() {
+            const value = confirmPasswordInput.value;
+            const passwordValue = passwordInput.value;
+            
+            if (value !== passwordValue) {
+                showError(confirmPasswordInput, confirmPasswordError);
+                return false;
+            } else {
+                hideError(confirmPasswordInput, confirmPasswordError);
+                return true;
+            }
+        }
+        
+        // Helper functions for showing/hiding errors
+        function showError(input, errorElement) {
+            input.style.borderColor = '#dc3545';
+            errorElement.style.display = 'block';
+        }
+        
+        function hideError(input, errorElement) {
+            input.style.borderColor = '#ddd';
+            errorElement.style.display = 'none';
+        }
+        
+        // Real-time validation as user types
+        fullNameInput.addEventListener('blur', validateFullName);
+        usernameInput.addEventListener('blur', validateUsername);
+        emailInput.addEventListener('blur', validateEmail);
+        phoneInput.addEventListener('blur', validatePhone);
+        addressInput.addEventListener('blur', validateAddress);
+    });
+</script>
 </body>
 </html>
+
