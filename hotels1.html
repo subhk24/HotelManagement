@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotels in Delhi | StayNest</title>
+  <link rel="stylesheet" href="hotels1.css">
+</head>
+<body>
+  
+
+<div class="top-bar">
+    <div class="top-bar-content">
+        <div>Welcome to StayNest - Book your perfect stay today!</div>
+        <div>Contact: support@staynest.com</div>
+    </div>
+</div>
+
+<!-- Header Navigation -->
+<header>
+    <div class="nav-container">
+        <div class="logo">Stay<span>Nest</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Hotels</a></li>
+                <li><a href="#">Account</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#">Cart</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-login">Login</a>
+            <a href="#" class="btn btn-signup">Sign Up</a>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- PAGE TITLE / SEARCH SECTION -->
+<section class="search-section">
+  <div class="search-bar">
+
+
+    <div class="location-box">
+  <input type="text" id="location-input" placeholder="Area, Landmark or Property Name" autocomplete="off">
+  <div id="popular-dropdown" class="popular-dropdown">
+    <h4>Popular Searches</h4>
+    <ul id="popular-list"></ul>
+  </div>
+</div>
+
+
+
+
+    <!-- <input type="text" placeholder="Area, Landmark or Property Name">  -->
+
+<!-- Location Input -->
+  <!-- <div class="location-box">
+    <input type="text" id="location-input" placeholder="Area, Landmark or Property Name" autocomplete="off">
+     POPULAR SEARCH DROPDOWN -->
+    <!-- <div id="popular-dropdown" class="popular-dropdown">
+      <h4>Popular Searches</h4>
+      <ul id="popular-list"></ul>
+    </div>
+  </div>  -->
+
+
+    <div class="date-input">
+      <label>Check-in</label>
+      <input type="date" id="checkin" value="2025-10-27">
+    </div>
+
+    <div class="date-input">
+      <label>Checkout</label>
+      <input type="date" id="checkout" value="2025-10-28">
+    </div>
+
+    <!-- <div class="guests">
+       <label>Guests & Rooms</label>
+      <select>
+        <option>2 Adults · 1 Room</option>
+        <option>1 Adult · 1 Room</option>
+        <option>2 Adults · 2 Rooms</option>
+        <option>Family (4 Adults · 2 Rooms)</option>
+      </select> 
+    </div> -->
+<div class="guests">
+  <label>Guests & Rooms</label>
+  <div class="guest-dropdown">
+    <button id="guest-btn">2 Adults · 1 Room</button>
+
+    <div class="guest-panel" id="guest-panel">
+      <div class="guest-row">
+        <span>Rooms (Max 20)</span>
+        <div class="counter">
+          <button class="minus" data-type="rooms">−</button>
+          <span id="rooms-count">1</span>
+          <button class="plus" data-type="rooms">+</button>
+        </div>
+      </div>
+
+      <div class="guest-row">
+        <span>Adults (17+ yr)</span>
+        <div class="counter">
+          <button class="minus" data-type="adults">−</button>
+          <span id="adults-count">2</span>
+          <button class="plus" data-type="adults">+</button>
+        </div>
+      </div>
+
+      <div class="guest-row">
+        <span>Children (0–17 yr)</span>
+        <div class="counter">
+          <button class="minus" data-type="children">−</button>
+          <span id="children-count">0</span>
+          <button class="plus" data-type="children">+</button>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <strong>Travelling with children?</strong>
+        <p>If you are travelling with children, add number of children and their age to get the best rooms options and prices.</p>
+        <ul>
+          <li>🛏️ Extra Mattress</li>
+          <li>🍳 Kid Breakfast Inclusive plans</li>
+        </ul>
+      </div>
+
+      <button class="done-btn" id="done-btn">DONE</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <button class="update-btn">Update Search</button>
+  </div>
+</section>
+
+<!-- SORT BY SECTION -->
+<section class="sort-section">
+  <div class="sort-container">
+    <div class="sort-left">
+      <span class="sort-title">Sort By:</span>
+      <button class="sort-btn active" data-sort="popular">Most popular</button>
+      <button class="sort-btn" data-sort="low">Price - Low to high</button>
+      <button class="sort-btn" data-sort="high">Price - High to low</button>
+      <button class="sort-btn" data-sort="rating">StayNest Ratings - Highest First</button>
+      <button class="sort-btn" data-sort="best">Lowest Price & Best Rated</button>
+    </div>
+    <div class="sort-right">
+      <input type="text" id="hotelSearch" placeholder="🔍 Search Location or Property Name">
+    </div>
+  </div>
+</section>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="hotel-container">
+   <!--   Filters Sidebar -->
+    <!-- <aside class="filter-section">
+      <h3>Filters</h3>
+      <label><input type="checkbox" value="Free Cancellation"> Free Cancellation</label>
+      <label><input type="checkbox" value="Couple Friendly"> Couple Friendly</label>
+      <label><input type="checkbox" value="Breakfast Included"> Breakfast Included</label>
+      <label><input type="checkbox" value="Near Metro"> Near Metro</label>
+      <label><input type="checkbox" value="Top Rated"> Top Rated</label>
+      <label><input type="checkbox" value="Budget Under ₹5000"> Budget Under ₹5000</label>
+    </aside>  -->
+
+
+
+
+
+<!-- ✅ Collapsible Goibibo-Style Filters -->
+ <aside class="filter-section">
+  <h3 class="filter-title">Filters</h3>
+
+  <div class="filter-card">
+    <div class="filter-header" data-toggle="popular">Popular Filters ▼</div>
+    <div class="filter-body" id="popular" style="display:none;">
+      <label><input type="checkbox" value="Book @ ₹0"> Book @ ₹0</label>
+      <label><input type="checkbox" value="Flexible Check-In"> Flexible Check-In</label>
+      <label><input type="checkbox" value="Couple Friendly"> Couple Friendly</label>
+      <label><input type="checkbox" value="Free Cancellation"> Free Cancellation</label>
+      <label><input type="checkbox" value="Free Breakfast"> Free Breakfast</label>
+    </div>
+  </div>
+
+  <div class="filter-card">
+    <div class="filter-header" data-toggle="price">Price ▼</div>
+    <div class="filter-body" id="price" style="display:none;">
+      <label><input type="checkbox" value="Budget Under ₹5000"> Budget Under ₹5000</label>
+      <label><input type="checkbox" value="₹5000 to ₹10000"> ₹5000 to ₹10000</label>
+      <label><input type="checkbox" value="₹10000+"> ₹10000+</label>
+    </div>
+  </div>
+
+  <div class="filter-card">
+    <div class="filter-header" data-toggle="location">Location ▼</div>
+    <div class="filter-body" id="location" style="display:none;">
+      <label><input type="checkbox" value="Chanakyapuri"> Chanakyapuri</label>
+      <label><input type="checkbox" value="Sardar Patel Marg"> Sardar Patel Marg</label>
+      <label><input type="checkbox" value="Greater Kailash"> Greater Kailash</label>
+    </div>
+  </div>
+
+  <div class="filter-card">
+    <div class="filter-header" data-toggle="rating">Star Rating ▼</div>
+    <div class="filter-body" id="rating" style="display:none;">
+      <label><input type="checkbox" value="5★"> 5★</label>
+      <label><input type="checkbox" value="4★"> 4★</label>
+    </div>
+  </div>
+
+  <button id="clearFiltersBtn">CLEAR FILTERS</button>
+</aside> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Hotel Cards List -->
+    <section class="hotel-list" id="hotelList"> 
+      <!-- JS will inject hotel cards here -->
+    </section>
+  </main> 
+
+
+
+
+
+
+  <script src="hotels1.js"></script>
+</body>
+</html>
