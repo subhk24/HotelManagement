@@ -46,6 +46,7 @@
         font-size: 15px;
         outline: none;
         transition: 0.3s;
+        box-sizing: border-box;
     }
 
     input:focus {
@@ -141,7 +142,7 @@ function registerUser(event) {
 
     alert(`Registration Successful! 🎉\n\nDetails:\nName: ${name}\nUsername: ${username}\nEmail: ${email}\nPhone: ${phone}`);
 
-    // ✅ Redirecting to index.html after clicking OK
+    // Fixed: Redirect to index.html instead of login.html
     window.location.href = "index.html";
 }
 </script>
