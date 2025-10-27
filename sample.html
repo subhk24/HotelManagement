@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayNest - Book Your Perfect Stay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset & Basic */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: #000;
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .logo span {
+            color: #a03ce7;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #a03ce7;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background-color: #a03ce7;  /* purple background */
+            color: #fff;                 /* white text */
+            border: 1px solid #a03ce7;
+        }
+
+        .btn-login:hover {
+            background-color: #8a2fc9;   /* darker purple on hover */
+        }
+
+        .btn-signup {
+            background-color: #a03ce7;
+            color: white;
+            border: 1px solid #a03ce7;
+        }
+
+        .btn-signup:hover {
+            background-color: #8a2fc9;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #a03ce7;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Search Section */
+        .search-section {
+            background:  url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 3rem 2rem;
+            color: white;
+        }
+
+        .search-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .search-btn {
+            grid-column: 1 / -1;
+            background: #a03ce7;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .search-btn:hover {
+            background: #8a2fc9;
+        }
+
+        /* Hotel Details */
+        .hotel-details {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .hotel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .hotel-title {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            margin: 0.5rem 0;
+        }
+
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #10b981;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .hotel-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 0.7rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            background: #f1f5f9;
+            border-color: #a03ce7;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            margin-bottom: 3rem;
+        }
+
+        .gallery-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            height: 450px;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .main-img {
+            grid-row: 1 / 3;
+            background: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+        }
+
+        .gallery-img {
+            background: url('https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover;
+        }
+
+        .gallery-img:nth-child(3) {
+            background: url('https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover;
+        }
+
+        .gallery-img:nth-child(4) {
+            background: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover;
+        }
+
+        .gallery-img:nth-child(5) {
+            background: url('https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover;
+        }
+
+        .view-more-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 0 auto;
+            transition: all 0.3s;
+        }
+
+        .view-more-btn:hover {
+            background: #a03ce7;
+            color: white;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: #a03ce7;
+            border-bottom: 3px solid #a03ce7;
+        }
+
+        .tab:hover:not(.active) {
+            background: #f8fafc;
+        }
+
+        .tab-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Rooms */
+        .room-card {
+            display: flex;
+            gap: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .room-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .room-img {
+            width: 300px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .room-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .room-details {
+            flex: 1;
+        }
+
+        .room-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .room-feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+        }
+
+        .room-price {
+            text-align: right;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #a03ce7;
+        }
+
+        .price-period {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .select-room-btn {
+            background: #a03ce7;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .select-room-btn:hover {
+            background: #8a2fc9;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-cart {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: #a03ce7;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .remove-item:hover {
+            color: #ef4444;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            position: sticky;
+            bottom: 0;
+            background: white;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #a03ce7;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: #8a2fc9;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: #a03ce7;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #a03ce7;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #444;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .gallery-main {
+                height: 350px;
+            }
+            
+            .room-card {
+                flex-direction: column;
+            }
+            
+            .room-img {
+                width: 100%;
+            }
+
+            .cart-modal {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .auth-buttons {
+                margin-top: 15px;
+            }
+            
+            .gallery-main {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr;
+                height: 500px;
+            }
+            
+            .main-img {
+                grid-column: 1 / 3;
+                grid-row: 1 / 3;
+            }
+            
+            .hotel-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hotel-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .cart-modal {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .gallery-main {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .main-img, .gallery-img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div>Welcome to StayNest - Book your perfect stay today!</div>
+            <div>Contact: support@staynest.com</div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">Stay<span>Nest</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Hotels</a></li>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li class="cart-icon" id="cartIcon">
+                        <a href="#">Cart <span class="cart-count" id="cartCount">0</span></a>
+                    </li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-login">Login</a>
+                <a href="#" class="btn btn-signup">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <h2 class="search-title">Where to?</h2>
+            <div class="search-form">
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <input type="text" id="destination" value="Delhi, India (DEL-Indira Gandhi International Airport)" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="check-in">Check-in</label>
+                    <input type="date" id="check-in" value="2023-11-02">
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out</label>
+                    <input type="date" id="check-out" value="2023-11-03">
+                </div>
+                <div class="form-group">
+                    <label for="travelers">Travellers & Rooms</label>
+                    <select id="travelers">
+                        <option>2 travellers, 1 room</option>
+                        <option>1 traveller, 1 room</option>
+                        <option>2 travellers, 2 rooms</option>
+                        <option>3 travellers, 1 room</option>
+                        <option>3 travellers, 2 rooms</option>
+                    </select>
+                </div>
+                <button class="search-btn">Search Hotels</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotel Details -->
+    <section class="hotel-details">
+        <div class="hotel-header">
+            <div>
+                <h1 class="hotel-title">Luxury Grand Hotel</h1>
+                <div class="hotel-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>The Leela Palace New Delhi</span>
+                </div>
+                <div class="hotel-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.8 (2,417 reviews)</span>
+                </div>
+            </div>
+            <div class="hotel-actions">
+                <button class="action-btn">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Share</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-heart"></i>
+                    <span>Save</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="image-gallery">
+            <div class="gallery-main">
+                <div class="gallery-img main-img"></div>
+                <div class="gallery-img"></div>
+                <div class="gallery-img"></div>
+                <div class="gallery-img"></div>
+                <div class="gallery-img"></div>
+            </div>
+            <button class="view-more-btn" id="viewMoreBtn">
+                <i class="fas fa-images"></i>
+                <span>View More Photos</span>
+            </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active">Overview</div>
+            <div class="tab">About</div>
+            <div class="tab">Rooms</div>
+            <div class="tab">Accessibility</div>
+            <div class="tab">Policies</div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <h2>Select a Room</h2>
+            <p style="margin: 1rem 0; color: #666;">Choose from our variety of luxurious rooms and suites</p>
+
+            <!-- Room Cards -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Deluxe Room">
+                </div>
+                <div class="room-details">
+                    <h3 class="room-title">Deluxe Room</h3>
+                    <p>Spacious room with a comfortable king-sized bed and modern amenities. Perfect for couples or solo travelers.</p>
+                    <div class="room-features">
+                        <div class="room-feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 Adults</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>1 King Bed</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Breakfast Included</span>
+                        </div>
+                    </div>
+                    <div class="room-price">
+                        <div class="price">₹8,499</div>
+                        <div class="price-period">per night</div>
+                        <button class="select-room-btn" data-room="Deluxe Room" data-price="8499" data-image="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80">Select Room</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Executive Suite">
+                </div>
+                <div class="room-details">
+                    <h3 class="room-title">Executive Suite</h3>
+                    <p>Luxurious suite with separate living area, premium amenities, and stunning city views. Ideal for business travelers.</p>
+                    <div class="room-features">
+                        <div class="room-feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span>3 Adults</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>1 King Bed + 1 Sofa Bed</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-tv"></i>
+                            <span>Smart TV</span>
+                        </div>
+                    </div>
+                    <div class="room-price">
+                        <div class="price">₹12,999</div>
+                        <div class="price-period">per night</div>
+                        <button class="select-room-btn" data-room="Executive Suite" data-price="12999" data-image="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80">Select Room</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Presidential Suite">
+                </div>
+                <div class="room-details">
+                    <h3 class="room-title">Presidential Suite</h3>
+                    <p>Our most luxurious offering with expansive space, premium finishes, personalized service, and exclusive amenities.</p>
+                    <div class="room-features">
+                        <div class="room-feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span>4 Adults</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>2 King Beds</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-hot-tub"></i>
+                            <span>Jacuzzi</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>Butler Service</span>
+                        </div>
+                    </div>
+                    <div class="room-price">
+                        <div class="price">₹24,999</div>
+                        <div class="price-period">per night</div>
+                        <button class="select-room-btn" data-room="Presidential Suite" data-price="24999" data-image="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80">Select Room</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Room Types -->
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Family Suite">
+                </div>
+                <div class="room-details">
+                    <h3 class="room-title">Family Suite</h3>
+                    <p>Perfect for families with children, featuring interconnected rooms, kid-friendly amenities, and plenty of space.</p>
+                    <div class="room-features">
+                        <div class="room-feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span>5 Adults</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>2 Queen Beds + 1 Single</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-gamepad"></i>
+                            <span>Kids Play Area</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-tv"></i>
+                            <span>Family Channels</span>
+                        </div>
+                    </div>
+                    <div class="room-price">
+                        <div class="price">₹15,999</div>
+                        <div class="price-period">per night</div>
+                        <button class="select-room-btn" data-room="Family Suite" data-price="15999" data-image="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80">Select Room</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Business Room">
+                </div>
+                <div class="room-details">
+                    <h3 class="room-title">Business Room</h3>
+                    <p>Designed for productivity with a dedicated workspace, high-speed internet, and business center access.</p>
+                    <div class="room-features">
+                        <div class="room-feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 Adults</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>1 King Bed</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>High-Speed WiFi</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-print"></i>
+                            <span>Printer Access</span>
+                        </div>
+                    </div>
+                    <div class="room-price">
+                        <div class="price">₹10,499</div>
+                        <div class="price-period">per night</div>
+                        <button class="select-room-btn" data-room="Business Room" data-price="10499" data-image="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80">Select Room</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-img">
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Honeymoon Suite">
+                </div>
+                <div class="room-details">
+                    <h3 class="room-title">Honeymoon Suite</h3>
+                    <p>Romantic getaway with special amenities, champagne on arrival, and breathtaking views for newlyweds.</p>
+                    <div class="room-features">
+                        <div class="room-feature">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 Adults</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>1 King Bed</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-wine-bottle"></i>
+                            <span>Champagne</span>
+                        </div>
+                        <div class="room-feature">
+                            <i class="fas fa-heart"></i>
+                            <span>Romantic Decor</span>
+                        </div>
+                    </div>
+                    <div class="room-price">
+                        <div class="price">₹18,999</div>
+                        <div class="price-period">per night</div>
+                        <button class="select-room-btn" data-room="Honeymoon Suite" data-price="18999" data-image="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80">Select Room</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery Modal -->
+    <div class="modal" id="galleryModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Hotel Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Room">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Bathroom">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Lobby">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Pool">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Restaurant">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Exterior">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Suite">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Gym">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Bar">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Spa">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Conference Room">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Balcony">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h2 class="cart-title">Your Cart</h2>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>StayNest</h3>
+                <p>Book your perfect stay with us. We offer the best hotels and accommodations worldwide.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="#">Home</a>
+                <a href="#">Hotels</a>
+                <a href="#">Destinations</a>
+                <a href="#">Deals & Offers</a>
+                <a href="#">Blog</a>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQs</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-envelope"></i> support@staynest.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Hotel Street, Tourism City</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 StayNest. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartModal = document.getElementById('cartModal');
+        const closeCart = document.querySelector('.close-cart');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const selectRoomButtons = document.querySelectorAll('.select-room-btn');
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        const galleryModal = document.getElementById('galleryModal');
+        const closeModal = document.querySelector('.close-modal');
+
+        // Open cart modal
+        cartIcon.addEventListener('click', () => {
+            cartModal.style.display = 'block';
+        });
+
+        // Close cart modal
+        closeCart.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        // Add room to cart
+        selectRoomButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const room = button.getAttribute('data-room');
+                const price = parseInt(button.getAttribute('data-price'));
+                const image = button.getAttribute('data-image');
+                
+                addToCart(room, price, image);
+                
+                // Show confirmation
+                const originalText = button.textContent;
+                button.textContent = 'Added to Cart!';
+                button.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#a03ce7';
+                }, 2000);
+            });
+        });
+
+        // Add item to cart
+        function addToCart(room, price, image) {
+            cart.push({ room, price, image });
+            updateCart();
+        }
+
+        // Remove item from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        // Update cart UI
+        function updateCart() {
+            // Update cart count
+            cartCount.textContent = cart.length;
+            
+            // Update cart items
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+                cartTotal.textContent = '₹0';
+            } else {
+                let itemsHTML = '';
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    itemsHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-img">
+                                <img src="${item.image}" alt="${item.room}">
+                            </div>
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.room}</div>
+                                <div class="cart-item-price">₹${item.price}</div>
+                            </div>
+                            <div class="remove-item" onclick="removeFromCart(${index})">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    `;
+                    total += item.price;
+                });
+                
+                cartItems.innerHTML = itemsHTML;
+                cartTotal.textContent = `₹${total}`;
+            }
+        }
+
+        // Gallery Modal Functionality
+        viewMoreBtn.addEventListener('click', () => {
+            galleryModal.style.display = 'block';
+        });
+
+        closeModal.addEventListener('click', () => {
+            galleryModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === galleryModal) {
+                galleryModal.style.display = 'none';
+            }
+            if (event.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+        });
+
+        // Tab Functionality
+        const tabs = document.querySelectorAll('.tab');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // In a real application, you would load different content here
+                // based on which tab was clicked
+            });
+        });
+
+        // Search form functionality
+        const searchBtn = document.querySelector('.search-btn');
+        searchBtn.addEventListener('click', () => {
+            const destination = document.getElementById('destination').value;
+            const checkIn = document.getElementById('check-in').value;
+            const checkOut = document.getElementById('check-out').value;
+            const travelers = document.getElementById('travelers').value;
+            
+            alert(`Searching for hotels in ${destination} from ${checkIn} to ${checkOut} for ${travelers}`);
+            // In a real application, you would send this data to a server
+        });
+
+        // Initialize cart
+        updateCart();
+    </script>
+</body>
+</html>
