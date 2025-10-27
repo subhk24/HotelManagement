@@ -197,6 +197,147 @@ button {padding:8px 14px; border:none; border-radius:6px; cursor:pointer; transi
 .search-container input:focus {border-color:#9b30ff; box-shadow:0 0 4px rgba(155,48,255,0.4);}
 .actions {display:flex; justify-content:center; gap:8px;}
 
+/* Profile Section Styles */
+.profile-container {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #6a0dad;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin-right: 20px;
+}
+
+.profile-info h2 {
+    color: #6a0dad;
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    color: #666;
+}
+
+.profile-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / span 2;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1.5px solid #ddd;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #9b30ff;
+    box-shadow: 0 0 4px rgba(155,48,255,0.4);
+}
+
+.form-actions {
+    grid-column: 1 / span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.save-btn {
+    background-color: #6a0dad;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.save-btn:hover {
+    background-color: #9b30ff;
+}
+
+.cancel-btn {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.cancel-btn:hover {
+    background-color: #ddd;
+}
+
+/* Success message */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: none;
+}
+
+/* Edit mode toggle */
+.edit-toggle {
+    background: none;
+    border: none;
+    color: #6a0dad;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-toggle:hover {
+    color: #9b30ff;
+}
+
 /* === FOOTER === */
 footer {
     background-color: #000;
@@ -238,7 +379,7 @@ footer {
     color: #a03ce7;
 }
 
-copyright {
+.copyright {
     margin-top: 20px;
     opacity: 0.7;
     font-size: 0.9rem;
@@ -277,6 +418,56 @@ copyright {
 
 <main>
   <h1>🏨 My StayNest Dashboard</h1>
+  
+  <!-- Profile Section -->
+  <div class="section profile-container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="profile-info">
+            <h2 id="profileName">Subhdeep</h2>
+            <p id="profileUsername">@subhk24</p>
+        </div>
+        <button class="edit-toggle" id="editProfileToggle">
+            <i class="fas fa-edit"></i> Edit Profile
+        </button>
+    </div>
+    
+    <div class="success-message" id="profileSuccessMessage">
+        Profile updated successfully!
+    </div>
+    
+    <form id="profileForm">
+        <div class="profile-form">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" value="Subhdeep" readonly>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" value="subhk24" readonly>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="subhk248200@gmail.com" readonly>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" value="7681955064" readonly>
+            </div>
+            <div class="form-group full-width">
+                <label for="address">Address</label>
+                <input type="text" id="address" value="New Delhi" readonly>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-btn" id="cancelEdit">Cancel</button>
+                <button type="submit" class="save-btn" id="saveProfile">Save Changes</button>
+            </div>
+        </div>
+    </form>
+  </div>
+  
   <div class="cards">
     <div class="card">
       <i class="fas fa-bed"></i>
@@ -349,9 +540,17 @@ copyright {
     </div>
 </footer>
 
-
 <!-- JAVASCRIPT -->
 <script>
+// Profile data
+let userProfile = {
+    fullName: "Subhdeep",
+    username: "subhk24",
+    email: "subhk248200@gmail.com",
+    phone: "7681955064",
+    address: "New Delhi"
+};
+
 let bookings = [
   {id:2, hotel:'Hotel Willow Banks', location:'Manali', img:'https://tse3.mm.bing.net/th/id/OIP.J8rZYXFyA4zXNJ91yA9CWQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3', checkIn:'2025-10-20', checkOut:'2025-10-25', guests:3, rooms:2, price:8000},
   {id:1, hotel:'Regenta Hotel', location:'Jaipur', img:'image2.jpg', checkIn:'2025-09-10', checkOut:'2025-09-12', guests:2, rooms:1, price:5000},
@@ -363,6 +562,89 @@ let savedHotels = [
   {id:2, hotel:'ITC Grand', location:'Delhi', price:9000, img:'image6.jpg'}
 ];
 
+// Profile functionality
+function toggleEditMode() {
+    const inputs = document.querySelectorAll('#profileForm input');
+    const isEditing = inputs[0].readOnly;
+    
+    inputs.forEach(input => {
+        input.readOnly = !isEditing;
+    });
+    
+    const editToggle = document.getElementById('editProfileToggle');
+    const saveBtn = document.getElementById('saveProfile');
+    const cancelBtn = document.getElementById('cancelEdit');
+    
+    if (isEditing) {
+        // Entering edit mode
+        editToggle.innerHTML = '<i class="fas fa-times"></i> Cancel Edit';
+        saveBtn.style.display = 'block';
+        cancelBtn.style.display = 'block';
+    } else {
+        // Exiting edit mode
+        editToggle.innerHTML = '<i class="fas fa-edit"></i> Edit Profile';
+        saveBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        resetFormToCurrentProfile();
+    }
+}
+
+function resetFormToCurrentProfile() {
+    document.getElementById('fullName').value = userProfile.fullName;
+    document.getElementById('username').value = userProfile.username;
+    document.getElementById('email').value = userProfile.email;
+    document.getElementById('phone').value = userProfile.phone;
+    document.getElementById('address').value = userProfile.address;
+}
+
+function saveProfile(event) {
+    event.preventDefault();
+    
+    // Get updated values
+    userProfile.fullName = document.getElementById('fullName').value;
+    userProfile.username = document.getElementById('username').value;
+    userProfile.email = document.getElementById('email').value;
+    userProfile.phone = document.getElementById('phone').value;
+    userProfile.address = document.getElementById('address').value;
+    
+    // Update the profile display
+    document.getElementById('profileName').textContent = userProfile.fullName;
+    document.getElementById('profileUsername').textContent = '@' + userProfile.username;
+    
+    // Show success message
+    const successMessage = document.getElementById('profileSuccessMessage');
+    successMessage.style.display = 'block';
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+    }, 3000);
+    
+    // Exit edit mode
+    toggleEditMode();
+    
+    // In a real application, you would send this data to a server here
+    console.log('Profile updated:', userProfile);
+}
+
+// Initialize profile
+function initProfile() {
+    // Set initial values
+    resetFormToCurrentProfile();
+    document.getElementById('profileName').textContent = userProfile.fullName;
+    document.getElementById('profileUsername').textContent = '@' + userProfile.username;
+    
+    // Hide save and cancel buttons initially
+    document.getElementById('saveProfile').style.display = 'none';
+    document.getElementById('cancelEdit').style.display = 'none';
+    
+    // Add event listeners
+    document.getElementById('editProfileToggle').addEventListener('click', toggleEditMode);
+    document.getElementById('cancelEdit').addEventListener('click', toggleEditMode);
+    document.getElementById('profileForm').addEventListener('submit', saveProfile);
+}
+
+// Existing dashboard functionality
 function renderCounts() {
   document.getElementById('bookingCount').textContent = bookings.length;
   document.getElementById('savedCount').textContent = savedHotels.length;
@@ -433,13 +715,16 @@ function deleteSaved(id) {
   }
 }
 
-document.getElementById('searchBooking').addEventListener('input', renderBookings);
-document.getElementById('searchSaved').addEventListener('input', renderSaved);
-
+// Initialize everything when page loads
 window.onload = () => {
+  initProfile();
   renderCounts();
   renderBookings();
   renderSaved();
+  
+  // Add search functionality
+  document.getElementById('searchBooking').addEventListener('input', renderBookings);
+  document.getElementById('searchSaved').addEventListener('input', renderSaved);
 };
 </script>
 </body>
