@@ -359,14 +359,23 @@ document.getElementById('searchBtn').addEventListener('click', () => {
 });
 
 // ---------- WELCOME MODAL FUNCTIONS ----------
-// Check if user is logged in or has seen the modal before
+// Check if we should show the modal
 function shouldShowWelcomeModal() {
-  // Check if user is logged in (you would replace this with your actual auth check)
-  const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-  const hasSeenModal = localStorage.getItem('hasSeenWelcomeModal') === 'true';
+  // Check URL parameters first (for when user comes back from signup/login)
+  const urlParams = new URLSearchParams(window.location.search);
+  const fromSignup = urlParams.get('fromSignup');
+  const fromLogin = urlParams.get('fromLogin');
   
-  // Show modal only if user is NOT logged in AND hasn't seen the modal before
-  return !isLoggedIn && !hasSeenModal;
+  // If user just signed up or logged in, don't show modal
+  if (fromSignup === 'true' || fromLogin === 'true') {
+    return false;
+  }
+  
+  // Check localStorage for previous visits
+  const hasSeenModal = localStorage.getItem('hasSeenWelcomeModal');
+  
+  // Show modal only if user hasn't seen it before
+  return !hasSeenModal;
 }
 
 // Show modal on page load if needed
@@ -376,32 +385,21 @@ window.addEventListener('load', function() {
   }
 });
 
-// Redirect to signup page and mark modal as seen
+// Redirect to signup page
 function redirectToSignup() {
   // Mark that user has seen the modal
   localStorage.setItem('hasSeenWelcomeModal', 'true');
   window.location.href = 'signup.html';
 }
 
-// Redirect to login page and mark modal as seen
+// Redirect to login page
 function redirectToLogin() {
   // Mark that user has seen the modal
   localStorage.setItem('hasSeenWelcomeModal', 'true');
   window.location.href = 'login-selection.html';
 }
-
-// Optional: Function to call when user successfully logs in or signs up
-function markUserAsLoggedIn() {
-  localStorage.setItem('userLoggedIn', 'true');
-  localStorage.setItem('hasSeenWelcomeModal', 'true');
-}
-
-// Optional: Function to log out
-function logout() {
-  localStorage.setItem('userLoggedIn', 'false');
-  // Don't reset hasSeenWelcomeModal so they don't see the modal again
-}
 </script>
 
 </body>
 </html>
+
