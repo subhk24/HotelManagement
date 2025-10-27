@@ -5,299 +5,751 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hotel Booking - Shimla</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      margin: 0;
-      padding: 0;
+    /* Reset & Basic */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    body {
+        background-color: #f8f9fa;
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Main content wrapper */
+    .main-content {
+        flex: 1;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+        background-color: #000;
+        color: white;
+        padding: 8px 0;
+        font-size: 0.9rem;
+    }
+
+    .top-bar-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    /* Header Navigation */
+    header {
+        background-color: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #000;
+    }
+
+    .logo span {
+        color: #a03ce7;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+    nav ul li {
+        margin-left: 25px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #000;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: #a03ce7;
+    }
+
+    /* Auth Buttons */
+    .auth-buttons {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .btn-login {
+        background-color: #a03ce7;
+        color: #fff;
+        border: 1px solid #a03ce7;
+    }
+
+    .btn-login:hover {
+        background-color: #8a2fc9;
+    }
+
+    .btn-signup {
+        background-color: #a03ce7;
+        color: white;
+        border: 1px solid #a03ce7;
+    }
+
+    .btn-signup:hover {
+        background-color: #8a2fc9;
+    }
+
+    /* Header Styles */
     .header {
-      background: #6a0dad;
-      padding: 15px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+        background: #6a0dad;
+        padding: 15px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
     }
 
     .header .logo {
-      font-size: 22px;
-      font-weight: bold;
+        font-size: 22px;
+        font-weight: bold;
     }
 
     .header .nav {
-      display: flex;
-      gap: 20px;
+        display: flex;
+        gap: 20px;
     }
 
     .header .nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 15px;
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
     }
 
     .header .search-box {
-      display: flex;
-      gap: 10px;
+        display: flex;
+        gap: 10px;
     }
 
     .header input,
     .header select {
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
+        padding: 8px;
+        border-radius: 5px;
+        border: none;
     }
 
     .header button.search-btn {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
     .header .right-buttons {
-      display: flex;
-      gap: 10px;
+        display: flex;
+        gap: 10px;
     }
 
     .header .right-buttons button {
-      background: white;
-      color: #6a0dad;
-      border: none;
-      padding: 7px 12px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-weight: bold;
+        background: white;
+        color: #6a0dad;
+        border: none;
+        padding: 7px 12px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    /* Content Layout */
+    .content-container {
+        display: flex;
+        gap: 20px;
+        margin: 20px 0;
     }
 
     .filters {
-      width: 20%;
-      float: left;
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
-      margin: 20px;
+        width: 25%;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        height: fit-content;
     }
 
-    .filters h3 {
-      margin-bottom: 10px;
+    .filter-section {
+        margin-bottom: 25px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
     }
 
-    .filters label {
-      display: block;
-      margin: 8px 0;
+    .filter-section:last-child {
+        border-bottom: none;
+    }
+
+    .filter-section h4 {
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .filter-section label {
+        display: block;
+        margin: 10px 0;
+        cursor: pointer;
+        color: #555;
+        transition: color 0.3s;
+    }
+
+    .filter-section label:hover {
+        color: #a03ce7;
+    }
+
+    .filter-section input[type="checkbox"] {
+        margin-right: 8px;
+        transform: scale(1.1);
+    }
+
+    .star-rating {
+        color: #ffc107;
+        font-weight: bold;
     }
 
     .hotel-list {
-      width: 70%;
-      float: right;
-      margin: 20px;
+        width: 75%;
     }
 
     .hotel-card {
-      background: #fff;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
+        background: #fff;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hotel-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
     }
 
     .hotel-card a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      padding: 15px;
-    }
-
-    .hotel-card a:hover {
-      background: #f0e6fa;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        padding: 15px;
     }
 
     .hotel-card img {
-      width: 200px;
-      height: 150px;
-      border-radius: 10px;
-      margin-right: 15px;
+        width: 200px;
+        height: 150px;
+        border-radius: 10px;
+        margin-right: 15px;
+        object-fit: cover;
     }
 
     .hotel-info {
-      flex: 1;
+        flex: 1;
     }
 
     .hotel-info h2 {
-      margin: 0;
-      font-size: 20px;
+        margin: 0;
+        font-size: 20px;
+        color: #333;
     }
 
     .hotel-info p {
-      margin: 5px 0;
+        margin: 8px 0;
+        color: #666;
     }
 
     .price {
-      color: green;
-      font-weight: bold;
+        color: #28a745;
+        font-weight: bold;
+        font-size: 18px;
     }
 
     .rating {
-      background: #28a745;
-      color: white;
-      padding: 3px 8px;
-      border-radius: 5px;
-      font-size: 12px;
+        background: #28a745;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        display: inline-block;
+        margin: 5px 0;
     }
 
-    .clearfix::after {
-      content: "";
-      display: table;
-      clear: both;
+    .hotel-card.hidden {
+        display: none;
+    }
+
+    /* Footer */
+    footer {
+        background-color: #000;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        margin-top: auto;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footer-logo {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .footer-logo span {
+        color: #a03ce7;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .footer-links a {
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+        color: #a03ce7;
+    }
+
+    .copyright {
+        margin-top: 20px;
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+
+    /* No results message */
+    .no-results {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        font-size: 18px;
+        display: none;
+    }
+
+    .no-results.show {
+        display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .nav-container {
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        nav ul {
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 5px 10px;
+        }
+
+        .auth-buttons {
+            margin-top: 15px;
+        }
+
+        .content-container {
+            flex-direction: column;
+        }
+
+        .filters {
+            width: 100%;
+        }
+
+        .hotel-list {
+            width: 100%;
+        }
+
+        .hotel-card a {
+            flex-direction: column;
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 200px;
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+
+        .header {
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px;
+        }
+
+        .header .search-box {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .header .right-buttons {
+            justify-content: center;
+        }
     }
   </style>
 </head>
 <body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+      <div class="top-bar-content">
+          <div>Welcome to StayNest - Book your perfect stay today!</div>
+          <div>Contact: support@staynest.com</div>
+      </div>
+  </div>
 
-  <div class="header">
-    <div class="logo">StayNest</div>
-    
-    <div class="nav">
-      <a href="#">Home</a>
-      <a href="#">Hotels</a>
-      <a href="#">Account</a>
-      <a href="#">Blog</a>
-      <a href="#">Pages</a>
-    </div>
+  <!-- Header Navigation -->
+  <header>
+      <div class="nav-container">
+          <div class="logo">Stay<span>Nest</span></div>
+          <nav>
+              <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="#">Hotels</a></li>
+                  <li><a href="#">Account</a></li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="#">Cart</a></li>
+                  <li><a href="dashboard.html">Dashboard</a></li>
+              </ul>
+          </nav>
+          <div class="auth-buttons">
+              <a href="#" class="btn btn-login">Login</a>
+              <a href="#" class="btn btn-signup">Sign Up</a>
+          </div>
+      </div>
+  </header>
 
-    <div class="search-box">
-      <input type="text" placeholder="Search destination">
-      <input type="date">
-      <input type="date">
-      <select>
-        <option>2 Adults, 1 Room</option>
-        <option>1 Adult, 1 Room</option>
-        <option>4 Adults, 2 Rooms</option>
-      </select>
-      <button class="search-btn">Search</button>
-    </div>
+  <div class="main-content">
+    <div class="content-container">
+      <div class="filters">
+        <div class="filter-section">
+          <h4>Popular Filters</h4>
+          <label><input type="checkbox" data-filter="breakfast"> Free Breakfast</label>
+          <label><input type="checkbox" data-filter="cancellation"> Free Cancellation</label>
+          <label><input type="checkbox" data-filter="couple"> Couple Friendly</label>
+          <label><input type="checkbox" data-filter="earlybird"> Early Bird Deal</label>
+          <label><input type="checkbox" data-filter="book0"> Book @ ₹0</label>
+          <label><input type="checkbox" data-filter="flexible"> Flexible Check-In</label>
+          <label><input type="checkbox" data-filter="dailydeal"> Daily Steal Deal</label>
+        </div>
 
-    <div class="right-buttons">
-      <button>Cart</button>
-      <button>Dashboard</button>
-      <button>Login</button>
+        <div class="filter-section">
+          <h4>Budget Stay</h4>
+          <label><input type="checkbox" data-filter="budget"> Budget Hotels</label>
+        </div>
+
+        <div class="filter-section">
+          <h4>Price Range</h4>
+          <label><input type="checkbox" data-price-range="0-1500"> Below ₹1,500</label>
+          <label><input type="checkbox" data-price-range="1500-3000"> ₹1,500 - ₹3,000</label>
+          <label><input type="checkbox" data-price-range="3000-5000"> ₹3,000 - ₹5,000</label>
+          <label><input type="checkbox" data-price-range="5000-999999"> Above ₹5,000</label>
+        </div>
+
+        <div class="filter-section">
+          <h4>Star Rating</h4>
+          <label><input type="checkbox" data-rating="4"> <span class="star-rating">★★★★</span> and more</label>
+          <label><input type="checkbox" data-rating="3"> <span class="star-rating">★★★</span></label>
+          <label><input type="checkbox" data-rating="2"> <span class="star-rating">★★</span></label>
+          <label><input type="checkbox" data-rating="1"> <span class="star-rating">★</span></label>
+        </div>
+      </div>
+
+      <div class="hotel-list">
+        <div class="no-results" id="noResults">No hotels match your selected filters. Please try different criteria.</div>
+        
+        <div class="hotel-card" data-price="1927" data-rating="4" data-features="breakfast,cancellation">
+          <a href="manali1.html">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.-ZI_sYK4LD3CBC9SipcGmAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hotel">
+            <div class="hotel-info">
+              <h2>Treebo Varuna With Mountain View</h2>
+              <p>Mall Road | 1.3 km from The Mall</p>
+              <span class="rating">4/5</span>
+              <p class="price">₹1,927 / night</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="hotel-card" data-price="2499" data-rating="4.2" data-features="breakfast,cancellation,couple,dailydeal">
+          <a href="manali2.html">
+            <img src="http://dimg04.c-ctrip.com/images//0225p120008plbu6f301B_W_390_390_R5.jpg" alt="Hotel Image">
+            <div class="hotel-info">
+              <h2>Royal Orchid Hotel</h2>
+              <p>Road | 2 km from Ridge</p>
+              <span class="rating">4.2/5</span>
+              <p class="price">₹2,499 / night</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="hotel-card" data-price="3100" data-rating="4.3" data-features="breakfast,cancellation,couple,flexible">
+          <a href="manali3.html">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.J8rZYXFyA4zXNJ91yA9CWQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hotel Image">
+            <div class="hotel-info">
+              <h2>Hotel Willow Banks</h2>
+              <p>Near Mall Road | 500 m from Church</p>
+              <span class="rating">4.3/5</span>
+              <p class="price">₹3,100 / night</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="hotel-card" data-price="5200" data-rating="4.5" data-features="breakfast,cancellation,couple,earlybird">
+          <a href="manali4.html">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcxWo8W1Wybc3ZaAv4Zx9ST-vyzcxd60TGEQ&s" alt="Hotel Image">
+            <div class="hotel-info">
+              <h2>Radisson Jass Shimla</h2>
+              <p>Shimla Bypass | 3 km from Mall Road</p>
+              <span class="rating">4.5/5</span>
+              <p class="price">₹5,200 / night</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="hotel-card" data-price="2750" data-rating="4.1" data-features="breakfast,cancellation,book0">
+          <a href="manali5.html">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmNEm0ASsPadF2cNoaBCqP5qJt3_9SCJCF3w&s" alt="Hotel Image">
+            <div class="hotel-info">
+              <h2>Hotel Combermere</h2>
+              <p>The Mall | 200 m from Ridge</p>
+              <span class="rating">4.1/5</span>
+              <p class="price">₹2,750 / night</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="hotel-card" data-price="3800" data-rating="4.0" data-features="breakfast,cancellation,dailydeal">
+          <a href="manali6.html">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR2hcfFa55M7-BTVO8M0wDDkpWyPhtzAon3A&s" alt="Hotel Image">
+            <div class="hotel-info">
+              <h2>Marigold Sarovar Portico</h2>
+              <p>Kufri Road | 5 km from Kufri</p>
+              <span class="rating">4.0/5</span>
+              <p class="price">₹3,800 / night</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="hotel-card" data-price="1650" data-rating="3.9" data-features="breakfast,budget">
+          <a href="manali7.html">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzfBdjX_W99t5Cw31B6QR_pDDypbk4WheXUw&s" alt="Hotel Image">
+            <div class="hotel-info">
+              <h2>Hotel Baljees Regency</h2>
+              <p>Circular Road | 1.5 km from Railway Station</p>
+              <span class="rating">3.9/5</span>
+              <p class="price">₹1,650 / night</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="hotel-card" data-price="6000" data-rating="4.6" data-features="breakfast,cancellation,couple,earlybird">
+          <a href="manali8.html">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnzKWrqQ_uNnehpKbrWkGLOyU5z87N7oyD4w&s" alt="Hotel Image">
+            <div class="hotel-info">
+              <h2>Clarkes Hotel</h2>
+              <p>The Mall | 1 km from Church</p>
+              <span class="rating">4.6/5</span>
+              <p class="price">₹6,000 / night</p>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="filters">
-    <h3>Filters</h3>
-    <strong>Popular Filters</strong>
-    <label><input type="checkbox"> Free Breakfast</label>
-    <label><input type="checkbox"> Free Cancellation</label>
-    <label><input type="checkbox"> Couple Friendly</label>
-    <label><input type="checkbox"> Early Bird Deal</label>
-    <label><input type="checkbox"> Book @ ₹0</label>
-    <label><input type="checkbox"> Flexible Check-In</label>
-    <label><input type="checkbox"> Daily Steal Deal</label>
-  </div>
+  <!-- FOOTER -->
+  <footer>
+      <div class="footer-content">
+          <div class="footer-logo">Stay<span>Nest</span></div>
+          <h2 style="margin-bottom: 15px; color: #a03ce7;">About Us</h2>
+          <div class="footer-links">
+              <a href="#">Contact</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">FAQ</a>
+          </div>
+          <div class="copyright">
+              © 2025 StayNest. All rights reserved. | Book your perfect stay with us
+          </div>
+      </div>
+  </footer>
 
-  <div class="hotel-list">
-    <div class="hotel-card">
-      <a href="manali1.html">
-        <img src="https://tse3.mm.bing.net/th/id/OIP.-ZI_sYK4LD3CBC9SipcGmAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hotel">
-        <div class="hotel-info">
-          <h2>Treebo Varuna With Mountain View</h2>
-          <p>Mall Road | 1.3 km from The Mall</p>
-          <span class="rating">4/5</span>
-          <p class="price">₹1,927 / night</p>
-        </div>
-      </a>
-    </div>
-      <div class="hotel-card">
-        <a href="manali2.html">
-        <img src="http://dimg04.c-ctrip.com/images//0225p120008plbu6f301B_W_390_390_R5.jpg" alt="Hotel Image">
-        <div class="hotel-info">
-          <h2>Royal Orchid Hotel</h2>
-          <p>Road | 2 km from Ridge</p>
-          <span class="rating">4.2/5</span>
-          <p class="price">₹2,499 / night</p>
-        </div>
-        </a>
-      </div>
+  <script>
+    // Hotel data with attributes for filtering
+    const hotels = [
+        { element: document.querySelectorAll('.hotel-card')[0], price: 1927, rating: 4, features: ['breakfast', 'cancellation'] },
+        { element: document.querySelectorAll('.hotel-card')[1], price: 2499, rating: 4.2, features: ['breakfast', 'cancellation', 'couple', 'dailydeal'] },
+        { element: document.querySelectorAll('.hotel-card')[2], price: 3100, rating: 4.3, features: ['breakfast', 'cancellation', 'couple', 'flexible'] },
+        { element: document.querySelectorAll('.hotel-card')[3], price: 5200, rating: 4.5, features: ['breakfast', 'cancellation', 'couple', 'earlybird'] },
+        { element: document.querySelectorAll('.hotel-card')[4], price: 2750, rating: 4.1, features: ['breakfast', 'cancellation', 'book0'] },
+        { element: document.querySelectorAll('.hotel-card')[5], price: 3800, rating: 4.0, features: ['breakfast', 'cancellation', 'dailydeal'] },
+        { element: document.querySelectorAll('.hotel-card')[6], price: 1650, rating: 3.9, features: ['breakfast', 'budget'] },
+        { element: document.querySelectorAll('.hotel-card')[7], price: 6000, rating: 4.6, features: ['breakfast', 'cancellation', 'couple', 'earlybird'] }
+    ];
 
-      <div class="hotel-card">
-        <a href="manali3.html">
-        <img src="https://tse3.mm.bing.net/th/id/OIP.J8rZYXFyA4zXNJ91yA9CWQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Hotel Image">
-        <div class="hotel-info">
-          <h2>Hotel Willow Banks</h2>
-          <p>Near Mall Road | 500 m from Church</p>
-          <span class="rating">4.3/5</span>
-          <p class="price">₹3,100 / night</p>
-        </div>
-        </a>
-      </div>
-<div class="hotel-card">
-        <a href="manali4.html">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcxWo8W1Wybc3ZaAv4Zx9ST-vyzcxd60TGEQ&s" alt="Hotel Image">
-        <div class="hotel-info">
-          <h2>Radisson Jass Shimla</h2>
-          <p>Shimla Bypass | 3 km from Mall Road</p>
-          <span class="rating">4.5/5</span>
-          <p class="price">₹5,200 / night</p>
-        </div>
-        </a>
-      </div>
+    // Filter elements
+    const filterCheckboxes = document.querySelectorAll('.filters input[type="checkbox"]');
+    const noResultsMessage = document.getElementById('noResults');
 
-      <div class="hotel-card">
-        <a href="manali5.html">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmNEm0ASsPadF2cNoaBCqP5qJt3_9SCJCF3w&s" alt="Hotel Image">
-        <div class="hotel-info">
-          <h2>Hotel Combermere</h2>
-          <p>The Mall | 200 m from Ridge</p>
-          <span class="rating">4.1/5</span>
-          <p class="price">₹2,750 / night</p>
-        </div>
-        </a>
-      </div>
-<div class="hotel-card">
-        <a href="manali6.html">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR2hcfFa55M7-BTVO8M0wDDkpWyPhtzAon3A&s" alt="Hotel Image">
-        <div class="hotel-info">
-          <h2>Marigold Sarovar Portico</h2>
-          <p>Kufri Road | 5 km from Kufri</p>
-          <span class="rating">4.0/5</span>
-          <p class="price">₹3,800 / night</p>
-        </div>
-        </a>
-      </div>
+    // Price range mapping
+    const priceRanges = {
+        '0-1500': { min: 0, max: 1500 },
+        '1500-3000': { min: 1500, max: 3000 },
+        '3000-5000': { min: 3000, max: 5000 },
+        '5000-999999': { min: 5000, max: 999999 }
+    };
 
-      <div class="hotel-card">
-        <a href="manali7.html">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzfBdjX_W99t5Cw31B6QR_pDDypbk4WheXUw&s" alt="Hotel Image">
-        <div class="hotel-info">
-          <h2>Hotel Baljees Regency</h2>
-          <p>Circular Road | 1.5 km from Railway Station</p>
-          <span class="rating">3.9/5</span>
-          <p class="price">₹1,650 / night</p>
-        </div>
-        </a>
-      </div>
-<div class="hotel-card">
-        <a href="manali8.html">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnzKWrqQ_uNnehpKbrWkGLOyU5z87N7oyD4w&s" alt="Hotel Image">
-        <div class="hotel-info">
-          <h2>Clarkes Hotel</h2>
-          <p>The Mall | 1 km from Church</p>
-          <span class="rating">4.6/5</span>
-          <p class="price">₹6,000 / night</p>
-        </div>
-        </a>
-      </div>
+    // Active filters
+    let activeFilters = {
+        features: [],
+        priceRanges: [],
+        ratings: [],
+        budget: false
+    };
 
-    </div>
-  </div>
+    // Event listeners for filter changes
+    filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateFilters);
+    });
+
+    function updateFilters() {
+        // Reset active filters
+        activeFilters = {
+            features: [],
+            priceRanges: [],
+            ratings: [],
+            budget: false
+        };
+
+        // Get all checked checkboxes
+        const checkedBoxes = document.querySelectorAll('.filters input[type="checkbox"]:checked');
+        
+        checkedBoxes.forEach(checkbox => {
+            if (checkbox.dataset.filter) {
+                if (checkbox.dataset.filter === 'budget') {
+                    activeFilters.budget = true;
+                } else {
+                    activeFilters.features.push(checkbox.dataset.filter);
+                }
+            } else if (checkbox.dataset.priceRange) {
+                activeFilters.priceRanges.push(checkbox.dataset.priceRange);
+            } else if (checkbox.dataset.rating) {
+                activeFilters.ratings.push(parseInt(checkbox.dataset.rating));
+            }
+        });
+
+        applyFilters();
+    }
+
+    function applyFilters() {
+        let visibleHotels = 0;
+
+        hotels.forEach(hotel => {
+            let showHotel = true;
+
+            // Check feature filters
+            if (activeFilters.features.length > 0) {
+                const hasAllFeatures = activeFilters.features.every(feature => 
+                    hotel.features.includes(feature)
+                );
+                if (!hasAllFeatures) {
+                    showHotel = false;
+                }
+            }
+
+            // Check budget filter
+            if (activeFilters.budget && !hotel.features.includes('budget')) {
+                showHotel = false;
+            }
+
+            // Check price range filters
+            if (activeFilters.priceRanges.length > 0 && showHotel) {
+                const inPriceRange = activeFilters.priceRanges.some(range => {
+                    const { min, max } = priceRanges[range];
+                    return hotel.price >= min && hotel.price <= max;
+                });
+                if (!inPriceRange) {
+                    showHotel = false;
+                }
+            }
+
+            // Check rating filters
+            if (activeFilters.ratings.length > 0 && showHotel) {
+                const matchesRating = activeFilters.ratings.some(rating => {
+                    return Math.floor(hotel.rating) >= rating;
+                });
+                if (!matchesRating) {
+                    showHotel = false;
+                }
+            }
+
+            // Show or hide hotel
+            if (showHotel) {
+                hotel.element.classList.remove('hidden');
+                visibleHotels++;
+            } else {
+                hotel.element.classList.add('hidden');
+            }
+        });
+
+        // Show no results message if no hotels are visible
+        if (visibleHotels === 0) {
+            noResultsMessage.classList.add('show');
+        } else {
+            noResultsMessage.classList.remove('show');
+        }
+    }
+
+    // Initialize filters
+    updateFilters();
+  </script>
 </body>
 </html>
