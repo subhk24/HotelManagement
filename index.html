@@ -362,13 +362,13 @@ document.getElementById('searchBtn').addEventListener('click', () => {
 // ---------- WELCOME MODAL FUNCTIONS ----------
 // Check if we should show the modal
 function shouldShowWelcomeModal() {
-  // Check if user is logged in FIRST
+  // Check if user is logged in
   const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-  console.log("User logged in:", isLoggedIn);
+  console.log('User logged in:', isLoggedIn);
   
   // If user is logged in, don't show modal
   if (isLoggedIn) {
-    console.log("User is logged in - hiding modal");
+    console.log('User is logged in - hiding modal');
     return false;
   }
   
@@ -376,47 +376,41 @@ function shouldShowWelcomeModal() {
   const urlParams = new URLSearchParams(window.location.search);
   const fromSignup = urlParams.get('fromSignup');
   const fromLogin = urlParams.get('fromLogin');
-  console.log("URL params - fromSignup:", fromSignup, "fromLogin:", fromLogin);
+  console.log('URL params - fromSignup:', fromSignup, 'fromLogin:', fromLogin);
   
   // If user just signed up or logged in, don't show modal
   if (fromSignup === 'true' || fromLogin === 'true') {
-    console.log("User just completed signup/login - hiding modal");
+    console.log('User just completed signup/login - hiding modal');
     return false;
   }
   
   // Check localStorage for previous visits
   const hasSeenModal = localStorage.getItem('hasSeenWelcomeModal');
-  console.log("Has seen modal before:", hasSeenModal);
+  console.log('Has seen modal before:', hasSeenModal);
   
   // Show modal only if user hasn't seen it before AND is not logged in
   const shouldShow = !hasSeenModal;
-  console.log("Should show modal:", shouldShow);
+  console.log('Should show modal:', shouldShow);
   return shouldShow;
 }
 
 // Show modal on page load if needed
 window.addEventListener('load', function() {
-  console.log("Page loaded - checking modal conditions");
+  console.log('Page loaded - checking modal conditions');
   const modal = document.getElementById('welcomeModal');
   
   if (shouldShowWelcomeModal()) {
-    console.log("Showing welcome modal");
+    console.log('Showing welcome modal');
     modal.style.display = 'flex';
   } else {
-    console.log("Hiding welcome modal");
+    console.log('Hiding welcome modal');
     modal.style.display = 'none';
   }
 });
 
-// Force hide modal function (extra safety)
-function forceHideModal() {
-  const modal = document.getElementById('welcomeModal');
-  modal.style.display = 'none';
-}
-
 // Redirect to signup page
 function redirectToSignup() {
-  console.log("Redirecting to signup page");
+  console.log('Redirecting to signup page');
   // Mark that user has seen the modal
   localStorage.setItem('hasSeenWelcomeModal', 'true');
   window.location.href = 'signup.html';
@@ -424,24 +418,15 @@ function redirectToSignup() {
 
 // Redirect to login page
 function redirectToLogin() {
-  console.log("Redirecting to login page");
+  console.log('Redirecting to login page');
   // Mark that user has seen the modal
   localStorage.setItem('hasSeenWelcomeModal', 'true');
   window.location.href = 'login-selection.html';
 }
-
-// Extra safety: Also check when page becomes visible
-document.addEventListener('visibilitychange', function() {
-  if (!document.hidden) {
-    const modal = document.getElementById('welcomeModal');
-    if (!shouldShowWelcomeModal()) {
-      modal.style.display = 'none';
-    }
-  }
-});
 </script>
 </body>
 </html>
+
 
 
 
